@@ -67,13 +67,16 @@ const Lunar: React.FC = () => {
             </div>
 
 
-            <div className="mt-8 text-center max-w-screen-xl mx-auto">
+            <div className="mt-8 text-center max-w-screen-xl mx-auto flex justify-center items-center">
+                <div className="flex-1">
+                    <Image src="/generated_images/txt2img.png" alt="Generated Image" className="rounded-lg shadow-md mb-8" width={180} height={500} />
+                </div>
 
-                <Image src="/generated_images/txt2img.png" alt="Generated Image" className="rounded-lg shadow-md mb-8" width={180} height={500} />
-
-                <Image src="/generated_images/load-test.png" alt="Generated Image" className="rounded-lg shadow-md mb-8" width={50} height={50} />
-
+                <div className="flex-1 flex justify-end items-center">
+                    <Image src="/generated_images/load-test.png" alt="Generated Image" className="rounded-lg shadow-md mb-8" width={100} height={100} />
+                </div>
             </div>
+
 
             <div className="flex justify-between w-full mb-8">
                 <input
