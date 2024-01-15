@@ -1,4 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
-
-module.exports = nextConfig
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ichef.bbci.co.uk",
+        port: "",
+        pathname: "/news/976/cpsprodpb/15951/production/_117310488_16.jpg.webp",
+      },
+    ],
+  },
+};
