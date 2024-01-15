@@ -12,8 +12,6 @@ const DownloadImagePage: React.FC = () => {
         // คลิกลิงค์เพื่อดาวน์โหลด
         downloadLink.click();
 
-        // ปิดหน้าเว็บ
-        window.close();
     }, []);
 
     return (

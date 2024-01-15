@@ -71,6 +71,8 @@ const Lunar: React.FC = () => {
 
                 <Image src="/generated_images/txt2img.png" alt="Generated Image" className="rounded-lg shadow-md mb-8" width={180} height={500} />
 
+                <Image src="/generated_images/load-test.png" alt="Generated Image" className="rounded-lg shadow-md mb-8" width={50} height={50} />
+
             </div>
 
             <div className="flex justify-between w-full mb-8">
