@@ -4,6 +4,12 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+interface TextToImageResponse {
+    artifacts: Array<{
+        base64: string;
+    }>;
+}
+
 const Showpic: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [imageDataUrl, setImageDataUrl] = useState<string>('');
@@ -19,23 +25,29 @@ const Showpic: React.FC = () => {
                     body: JSON.stringify(requestData),
                 });
 
-                const responseData = await response.json();
+                // Check if the response status is OK (200-299)
+                if (!response.ok) {
+                    throw new Error(`Non-OK response: ${response.status} ${response.statusText}`);
+                }
+
+                const responseData: TextToImageResponse = await response.json();
 
                 // Assuming there's only one image in the response
                 const image = responseData.artifacts[0];
 
                 // Create a data URL from the base64 data
-                const ImageDataUrl = `data:image/png;base64,${image.base64}`;
+                const imageDataUrl = `data:image/png;base64,${image.base64}`;
 
                 setLoading(false);
-                setImageDataUrl(ImageDataUrl);
+                setImageDataUrl(imageDataUrl);
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching data:', { status: 500 });
+                // Handle the error, e.g., show a user-friendly message or retry logic
             }
         };
 
         fetchData('/api/stable-diffusion', {});
-    }, []);
+    }, []); // The empty dependency array ensures that this effect runs once after the initial render
 
     return (
         <main className="mt-8 text-center max-w-screen-xl mx-auto flex justify-center items-center">
