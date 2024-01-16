@@ -1,22 +1,22 @@
-'use client'
-// pages/download-image.tsx
+// Loading.tsx
+"use client"
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
-const DownloadImagePage: React.FC = () => {
+const Loading: React.FC = () => {
     const [loading, setLoading] = useState(true);
-    const [imageData, setImageData] = useState<string | null>(null);
+    const [cloudinaryUrl, setCloudinaryUrl] = useState<string>('');
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchImageData = async () => {
             try {
-                // Fetch the latest image data from the API
                 const response = await fetch('/api/get-img');
-                const data = await response.json();
+                const imageData = await response.json();
 
                 if (response.ok) {
-                    setImageData(data.cloudinaryUrl);
+                    setCloudinaryUrl(imageData.cloudinaryUrl);
                 } else {
-                    console.error('Error fetching image data:', data);
+                    console.error('Error fetching image data:', imageData);
                 }
             } catch (error) {
                 console.error('Error fetching image data:', error);
@@ -25,53 +25,46 @@ const DownloadImagePage: React.FC = () => {
             }
         };
 
-        fetchData();
-    }, []);
+        fetchImageData();
+    }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
 
     useEffect(() => {
-        const downloadImage = async () => {
-            try {
-                if (imageData) {
-                    // Fetch the image data from Cloudinary
-                    const response = await fetch(imageData);
+        const handleDownload = () => {
+            const downloadLink = document.createElement('a');
+            downloadLink.href = cloudinaryUrl; // Set the URL from the fetched data
+            downloadLink.download = 'downloaded_image.png';
 
-                    if (response.ok) {
-                        // Convert the response to a Blob
-                        const blob = await response.blob();
-
-                        // Create a URL for the Blob
-                        const blobUrl = URL.createObjectURL(blob);
-
-                        // Create a download link
-                        const downloadLink = document.createElement('a');
-                        downloadLink.href = blobUrl;
-                        downloadLink.download = 'wallpaper_theme_lunarday.png';
-
-                        // Click the link to trigger the download
-                        downloadLink.click();
-                    } else {
-                        console.error('Error fetching image:', response.statusText);
-                    }
-                }
-            } catch (error) {
-                console.error('Error downloading image:', error);
-            } finally {
-                setLoading(false);
-            }
+            // Click the link to trigger the download
+            downloadLink.click();
         };
 
-        downloadImage();
-    }, [imageData]);
+        // Trigger download when the image is loaded
+        if (!loading && cloudinaryUrl) {
+            handleDownload();
+        }
+    }, [loading, cloudinaryUrl]);
 
     return (
-        <div>
-            {loading ? (
-                <h1>Loading Image Data...</h1>
-            ) : (
-                <h1>Downloading Image...</h1>
-            )}
-        </div>
+        <main className="mt-8 text-center max-w-screen-xl mx-auto flex justify-center items-center">
+            <div className="flex-1">
+                {loading ? (
+                    // แสดง Loader หรือข้อความ "Loading..."
+                    <div className="rounded-lg shadow-md mb-8" style={{ width: 450, height: 100, backgroundColor: 'lightgray' }}>
+                        Loading...
+                    </div>
+                ) : cloudinaryUrl ? (
+                    // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
+                    <Image
+                        src={cloudinaryUrl}
+                        alt="Generated Image"
+                        className="rounded-lg shadow-md mb-8"
+                        width={450}
+                        height={100}
+                    />
+                ) : null}
+            </div>
+        </main>
     );
 };
 
-export default DownloadImagePage;
+export default Loading;
