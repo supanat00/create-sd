@@ -73,7 +73,7 @@ export async function POST(req: Request) {
 
         console.log('Cloudinary response:', cloudinaryResponse);
 
-        const cloudinaryUrl = cloudinaryResponse.url;
+        const cloudinaryUrl = cloudinaryResponse.secure_url;
         console.log('Cloudinary URL:', cloudinaryUrl);
 
         // Save data to MongoDB using Prisma

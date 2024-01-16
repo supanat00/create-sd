@@ -8,12 +8,6 @@ module.exports = {
         port: "",
         pathname: "/da8eemrq8/**",
       },
-      {
-        protocol: "https",
-        hostname: "res.cloudinary.com",
-        port: "",
-        pathname: "/da8eemrq8/**",
-      },
     ],
   },
 };
