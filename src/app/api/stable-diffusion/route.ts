@@ -1,12 +1,20 @@
+'use server'
 import fetch from 'node-fetch'
-import fs from "fs";
 import { v2 as cloudinary } from "cloudinary";
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 interface TextToImageResponse {
     artifacts: Array<{
         seed: number;
         base64: string;
     }>;
+}
+
+interface PosteringData {
+    namepic?: string;
+    photo: string;
 }
 
 cloudinary.config({
@@ -68,7 +76,25 @@ export async function POST(req: Request) {
         const cloudinaryUrl = cloudinaryResponse.url;
         console.log('Cloudinary URL:', cloudinaryUrl);
 
-        return new Response(null, { status: 200 });
+        // Save data to MongoDB using Prisma
+        const postData: PosteringData = {
+            namepic: 'Lunar-day', // Replace with your actual data
+            photo: cloudinaryUrl,
+        };
+
+        const savedPostering = await prisma.postering.create({
+            data: postData,
+        });
+
+        console.log('Saved to MongoDB:', savedPostering);
+
+        // Close Prisma connection
+        await prisma.$disconnect();
+
+        return new Response(JSON.stringify({ cloudinaryUrl }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+        });
     } catch (error) {
         console.error('Error:', error);
         return new Response('Internal Server Error', { status: 500 });

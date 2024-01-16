@@ -9,46 +9,25 @@ const Showpic: React.FC = () => {
     const [cloudinaryUrl, setCloudinaryUrl] = useState<string>('');
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchImageData = async () => {
             try {
-                const response = await fetch('/api/stable-diffusion', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({}),
-                });
+                const response = await fetch('/api/get-image');
+                const imageData = await response.json();
 
-                const responseData = await response.json();
-                const image = responseData.artifacts[0];
-                const dataUrl = `data:image/png;base64,${image.base64}`;
-
-                // Upload image to Cloudinary and get the URL
-                const cloudinaryResponse = await fetch('/api/upload-to-cloudinary', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        base64Data: image.base64,
-
-
-                        publicId: 'olympic_flag', // Optional, use the desired publicId
-                        folder: 'stability',
-                    }),
-                });
-                const cloudinaryData = await cloudinaryResponse.json();
-                const cloudinaryImageUrl = cloudinaryData.url;
-
-                setCloudinaryUrl(cloudinaryImageUrl);
-                setLoading(false);
+                if (response.ok) {
+                    setCloudinaryUrl(imageData.cloudinaryUrl);
+                } else {
+                    console.error('Error fetching image data:', imageData);
+                }
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching image data:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
-        fetchData();
-    }, []);
+        fetchImageData();
+    }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
 
     return (
         <main className="mt-8 text-center max-w-screen-xl mx-auto flex justify-center items-center">
@@ -66,7 +45,7 @@ const Showpic: React.FC = () => {
                     <div className="rounded-lg shadow-md mb-8" style={{ width: 450, height: 100, backgroundColor: 'lightgray' }}>
                         Loading...
                     </div>
-                ) : (
+                ) : cloudinaryUrl ? (
                     // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
                     <Image
                         src={cloudinaryUrl}
@@ -75,7 +54,7 @@ const Showpic: React.FC = () => {
                         width={450}
                         height={100}
                     />
-                )}
+                ) : null}
             </div>
 
             <div className="flex flex-col items-center">

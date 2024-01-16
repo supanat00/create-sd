@@ -4,7 +4,11 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
+import router, { useRouter } from 'next/navigation';
+
 const Lunar: React.FC = () => {
+
+    const router = useRouter();
 
     const [text1, setText1] = useState<string>('');
     const [text2, setText2] = useState<string>('');
@@ -42,6 +46,8 @@ const Lunar: React.FC = () => {
             });
 
             const responseData = await response.json();
+
+            router.push('/lunar-prompt/show-pic');
 
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -87,14 +93,12 @@ const Lunar: React.FC = () => {
                     className="border p-4 rounded-md w-1/4 text-2xl"
                 />
             </div>
-            <Link href="/lunar-prompt/show-pic">
-                <button
-                    onClick={generateImage}
-                    className="bg-green-500 text-white px-24 py-5 rounded-full hover:bg-green-700"
-                >
-                    Finish
-                </button>
-            </Link>
+            <button
+                onClick={generateImage}
+                className="bg-green-500 text-white px-24 py-5 rounded-full hover:bg-green-700"
+            >
+                Finish
+            </button>
         </main>
     );
 };
