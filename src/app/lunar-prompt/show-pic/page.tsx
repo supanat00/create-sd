@@ -4,50 +4,24 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface TextToImageResponse {
-    artifacts: Array<{
-        base64: string;
-    }>;
-}
-
 const Showpic: React.FC = () => {
     const [loading, setLoading] = useState(true);
-    const [imageDataUrl, setImageDataUrl] = useState<string>('');
 
     useEffect(() => {
-        const fetchData = async (apiEndpoint: string, requestData: any) => {
+        // จำลองการโหลดข้อมูล (ตัวอย่าง: setTimeout)
+        const fetchData = async () => {
             try {
-                const response = await fetch(apiEndpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(requestData),
-                });
-
-                // Check if the response status is OK (200-299)
-                if (!response.ok) {
-                    throw new Error(`Non-OK response: ${response.status} ${response.statusText}`);
-                }
-
-                const responseData: TextToImageResponse = await response.json();
-
-                // Assuming there's only one image in the response
-                const image = responseData.artifacts[0];
-
-                // Create a data URL from the base64 data
-                const imageDataUrl = `data:image/png;base64,${image.base64}`;
-
+                // ทำตัวจำลองโหลดข้อมูล
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                // ข้อมูลโหลดเสร็จสิ้น
                 setLoading(false);
-                setImageDataUrl(imageDataUrl);
             } catch (error) {
-                console.error('Error fetching data:', { status: 500 });
-                // Handle the error, e.g., show a user-friendly message or retry logic
+                console.error('Error fetching data:', error);
             }
         };
 
-        fetchData('/api/stable-diffusion', {});
-    }, []); // The empty dependency array ensures that this effect runs once after the initial render
+        fetchData();
+    }, []); // ใส่ [] เพื่อให้ useEffect ทำงานเฉพาะครั้งแรก
 
     return (
         <main className="mt-8 text-center max-w-screen-xl mx-auto flex justify-center items-center">
@@ -68,7 +42,7 @@ const Showpic: React.FC = () => {
                 ) : (
                     // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
                     <Image
-                        src={imageDataUrl}
+                        src="/generated_images/txt2img.png"
                         alt="Generated Image"
                         className="rounded-lg shadow-md mb-8"
                         width={450}

@@ -45,18 +45,15 @@ export async function POST(req: Request) {
 
         const responseData: TextToImageResponse = <TextToImageResponse>await response.json();
 
-        // Assuming there's only one image in the response
-        const image = responseData.artifacts[0];
-
-        // Create a data URL from the base64 data
-        const imageDataUrl = `data:image/png;base64,${image.base64}`;
-
-        // Write the data URL to a file (optional)
-        // fs.writeFileSync(`public/generated_images/txt2img.png`, imageDataUrl);
-
-        return new Response(JSON.stringify({ imageUrl: imageDataUrl }), { status: 200 });
+        responseData.artifacts.forEach((image, index) => {
+            fs.writeFileSync(
+                `public/generated_images/txt2img.png`,
+                Buffer.from(image.base64, 'base64')
+            );
+        });
+        return new Response(null, { status: 200 });
     } catch (error) {
         console.error('Error:', error);
         return new Response('Internal Server Error', { status: 500 });
     }
-}
+};
