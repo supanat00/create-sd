@@ -10,7 +10,7 @@ export async function GET(req: Request) {
         await prisma.$connect();
 
         // Fetch the latest image data from the database
-        const latestImageData = await prisma.Postering.findFirst({
+        const latestImageData = await prisma.postering.findFirst({
             orderBy: { id: 'desc' }, // Order by id in descending order to get the latest entry
         });
 
