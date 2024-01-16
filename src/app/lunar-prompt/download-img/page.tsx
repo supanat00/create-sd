@@ -29,13 +29,35 @@ const Loading: React.FC = () => {
     }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
 
     useEffect(() => {
-        const handleDownload = () => {
-            const downloadLink = document.createElement('a');
-            downloadLink.href = cloudinaryUrl; // Set the URL from the fetched data
-            downloadLink.download = 'downloaded_image.png';
+        const handleDownload = async () => {
+            try {
+                if (cloudinaryUrl) {
+                    // Fetch the image data from Cloudinary
+                    const response = await fetch(cloudinaryUrl);
 
-            // Click the link to trigger the download
-            downloadLink.click();
+                    if (response.ok) {
+                        // Convert the response to a Blob
+                        const blob = await response.blob();
+
+                        // Create a URL for the Blob
+                        const blobUrl = URL.createObjectURL(blob);
+
+                        // Create a download link
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = blobUrl;
+                        downloadLink.download = 'wallpaper_theme_lunarday.png';
+
+                        // Click the link to trigger the download
+                        downloadLink.click();
+                    } else {
+                        console.error('Error fetching image:', response.statusText);
+                    }
+                }
+            } catch (error) {
+                console.error('Error downloading image:', error);
+            } finally {
+                setLoading(false);
+            }
         };
 
         // Trigger download when the image is loaded
