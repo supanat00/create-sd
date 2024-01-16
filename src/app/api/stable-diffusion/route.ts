@@ -1,5 +1,6 @@
 import fetch from 'node-fetch'
 import fs from "fs";
+import { v2 as cloudinary } from "cloudinary";
 
 interface TextToImageResponse {
     artifacts: Array<{
@@ -7,6 +8,12 @@ interface TextToImageResponse {
         base64: string;
     }>;
 }
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(req: Request) {
     try {
@@ -45,15 +52,25 @@ export async function POST(req: Request) {
 
         const responseData: TextToImageResponse = <TextToImageResponse>await response.json();
 
-        responseData.artifacts.forEach((image, index) => {
-            fs.writeFileSync(
-                `public/generated_images/txt2img.png`,
-                Buffer.from(image.base64, 'base64')
-            );
+        // Assuming there's only one image in the response
+        const image = responseData.artifacts[0];
+
+        // Upload image to Cloudinary
+        const cloudinaryResponse = await cloudinary.uploader.upload(`data:image/png;base64,${image.base64}`, {
+
+
+            public_id: 'olympic_flag',
+            folder: 'stability',
         });
+
+        console.log('Cloudinary response:', cloudinaryResponse);
+
+        const cloudinaryUrl = cloudinaryResponse.url;
+        console.log('Cloudinary URL:', cloudinaryUrl);
+
         return new Response(null, { status: 200 });
     } catch (error) {
         console.error('Error:', error);
         return new Response('Internal Server Error', { status: 500 });
     }
-};
+}

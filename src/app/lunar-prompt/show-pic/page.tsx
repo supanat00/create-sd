@@ -6,14 +6,41 @@ import Link from 'next/link';
 
 const Showpic: React.FC = () => {
     const [loading, setLoading] = useState(true);
+    const [cloudinaryUrl, setCloudinaryUrl] = useState<string>('');
 
     useEffect(() => {
-        // จำลองการโหลดข้อมูล (ตัวอย่าง: setTimeout)
         const fetchData = async () => {
             try {
-                // ทำตัวจำลองโหลดข้อมูล
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                // ข้อมูลโหลดเสร็จสิ้น
+                const response = await fetch('/api/stable-diffusion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({}),
+                });
+
+                const responseData = await response.json();
+                const image = responseData.artifacts[0];
+                const dataUrl = `data:image/png;base64,${image.base64}`;
+
+                // Upload image to Cloudinary and get the URL
+                const cloudinaryResponse = await fetch('/api/upload-to-cloudinary', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        base64Data: image.base64,
+
+
+                        publicId: 'olympic_flag', // Optional, use the desired publicId
+                        folder: 'stability',
+                    }),
+                });
+                const cloudinaryData = await cloudinaryResponse.json();
+                const cloudinaryImageUrl = cloudinaryData.url;
+
+                setCloudinaryUrl(cloudinaryImageUrl);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -21,7 +48,7 @@ const Showpic: React.FC = () => {
         };
 
         fetchData();
-    }, []); // ใส่ [] เพื่อให้ useEffect ทำงานเฉพาะครั้งแรก
+    }, []);
 
     return (
         <main className="mt-8 text-center max-w-screen-xl mx-auto flex justify-center items-center">
@@ -42,7 +69,7 @@ const Showpic: React.FC = () => {
                 ) : (
                     // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
                     <Image
-                        src="/generated_images/txt2img.png"
+                        src={cloudinaryUrl}
                         alt="Generated Image"
                         className="rounded-lg shadow-md mb-8"
                         width={450}

@@ -4,9 +4,9 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "ichef.bbci.co.uk",
+        hostname: "res.cloudinary.com",
         port: "",
-        pathname: "/news/976/cpsprodpb/15951/production/_117310488_16.jpg.webp",
+        pathname: "/da8eemrq8/image/upload/stability/",
       },
     ],
   },
