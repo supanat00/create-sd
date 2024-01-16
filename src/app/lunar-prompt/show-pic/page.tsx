@@ -48,12 +48,13 @@ const Showpic: React.FC = () => {
                 ) : cloudinaryUrl ? (
                     // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
                     <Image
-                        src={cloudinaryUrl}
+                        src={`${cloudinaryUrl}?timestamp=${new Date().getTime()}`}
                         alt="Generated Image"
                         className="rounded-lg shadow-md mb-8"
                         width={450}
                         height={100}
                     />
+
                 ) : null}
             </div>
 
