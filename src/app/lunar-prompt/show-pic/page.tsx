@@ -10,6 +10,7 @@ const Showpic: React.FC = () => {
 
     useEffect(() => {
         const fetchImageData = async () => {
+            'use server'
             try {
                 const response = await fetch('/api/get-img');
                 const imageData = await response.json();
