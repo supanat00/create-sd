@@ -1,8 +1,11 @@
 'use server'
-// pages/api/get-latest-image-data.ts
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
+
+interface ImageData {
+    cloudinaryUrl: string;
+}
 
 export async function GET(req: Request) {
     try {
@@ -22,21 +25,18 @@ export async function GET(req: Request) {
         // Get the 'cloudinaryUrl' from the latestImageData
         const cloudinaryUrl = latestImageData.photo;
 
-        // Create a Response with cache control headers
-        const response = new Response(JSON.stringify({ cloudinaryUrl }), {
+        // Disconnect from the database
+        await prisma.$disconnect();
+
+        return new Response(JSON.stringify({ cloudinaryUrl }), {
             status: 200,
             headers: {
                 'Content-Type': 'application/json',
-                'Cache-Control': 'no-store, must-revalidate', // Disable caching
             },
         });
-
-        return response;
     } catch (error) {
         console.error('Error fetching image data:', error);
         return new Response('Internal Server Error', { status: 500 });
-    } finally {
-        // Disconnect from the database
-        await prisma.$disconnect();
     }
 }
+
