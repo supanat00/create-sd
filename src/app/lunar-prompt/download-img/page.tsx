@@ -10,7 +10,12 @@ const Loading: React.FC = () => {
     useEffect(() => {
         const fetchImageData = async () => {
             try {
-                const response = await fetch('/api/get-img');
+                const response = await fetch(
+                    '/api/get-img',
+                    {
+                        next: { revalidate: 1 }
+                    }
+                );
                 const imageData = await response.json();
 
                 if (response.ok) {
