@@ -1,67 +1,100 @@
+'use client'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react';
+import background from "../../public/UI/home/home-bg.png";
+import centerbuttom from "../../public/UI/home/choose-button.png";
+import headtext from "../../public/UI/home/header-texts.png";
+import yearofdragon from "../../public/UI/home/year_of_the_dragon.png";
 
-export default function Home() {
+export default function Page() {
+  const router = useRouter();
+
+  // State to track which side is hovered
+  const [hoveredSide, setHoveredSide] = useState<string | null>(null);
+
+  // Function to handle the hover and set the hovered side
+  const handleHover = (side: string) => {
+    setHoveredSide(side);
+  };
+
+  // Function to handle the click and navigate to the specified route
+  const handleButtonClick = (route: string) => {
+    router.push(route);
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <header className="z-10 max-w-5xl w-full items-center justify-center font-mono text-lg lg:flex">
-        <p className="fixed left-1/2 top-0 transform -translate-x-1/2 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30 text-center">
-          Create mobile wallpapers using an AI generator.
-        </p>
-      </header>
-
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
+    <div>
+      {/* background */}
+      <div className="absolute inset-0">
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          alt="Background Image"
+          src={background}
+          placeholder="blur"
+          quality={100}
+          layout="fill"
+          objectFit="cover"
         />
       </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <Link
-          href="/lunar-prompt"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 flex flex-col items-end"
-          target=""
-          rel="noopener noreferrer"
+
+
+      {/* routes tab */}
+      <div className="flex h-screen">
+        {/* Left side */}
+        <div
+          className={`flex-1 bg-black relative ${hoveredSide === 'left' ? 'opacity-0' : 'opacity-75'}`}
+          onMouseEnter={() => handleHover('left')}
+          onMouseLeave={() => handleHover(null as unknown as string)}
+          onClick={() => handleButtonClick('/valentine-prompt')}
         >
-          <p className={`m-0 max-w-[30ch] text-sm`}>
-            THEME
-          </p>
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            <span className="inline-block transition-transform group-hover:-translate-x-1 motion-reduce:transform-none">
-              &lt;-
-            </span>
-            CHINESE <br /> {'NEW YEAR'}
-          </h2>
 
-        </Link>
+        </div>
 
-
-        <div className="col-span-2"></div>
-
-        <Link
-          href="/valentine-prompt"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target=""
-          rel="noopener noreferrer"
+        {/* Right side */}
+        <div
+          className={`flex-1 bg-black relative ${hoveredSide === 'right' ? 'opacity-0' : 'opacity-75'}`}
+          onMouseEnter={() => handleHover('right')}
+          onMouseLeave={() => handleHover(null as unknown as string)}
+          onClick={() => handleButtonClick('/lunar-prompt')}
         >
-          <p className={`m-0 max-w-[30ch] text-sm`}>
-            THEME
-          </p>
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            VALENTINE
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-            <br /> {'DAY'}
-          </h2>
-        </Link>
+
+        </div>
       </div>
-    </main>
-  )
+
+      {/* dragon */}
+      <div className={`absolute top-20 left-1/2 transform -translate-x-1/2`}>
+        <Image
+          alt="Head Text Image"
+          src={yearofdragon}
+          width={250}
+          height={200}
+          z-index={"1000"}
+        />
+      </div>
+
+      {/* headtext */}
+      <div className={`absolute top-60 left-1/2 transform -translate-x-1/2`}>
+        <Image
+          alt="Head Text Image"
+          src={headtext}
+          width={450}
+          height={450}
+          z-index={"1000"}
+
+        />
+      </div>
+
+      {/* centerbuttom */}
+      <div className={`absolute left-1/2 bottom-1/3 transform -translate-x-1/2`}>
+        <Image
+          alt="Center Button Image"
+          src={centerbuttom}
+          width={120}
+          height={120}
+          z-index={"1"}
+        />
+      </div>
+    </div>
+  );
 }
