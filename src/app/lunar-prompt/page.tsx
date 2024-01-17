@@ -3,7 +3,7 @@
 'use client'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from "../styles.module.css"; 0
+import styles from "../styles.module.css";
 import Image from 'next/image'
 
 // Assets 
@@ -73,8 +73,8 @@ export default function Page() {
                     src={background}
                     placeholder="blur"
                     quality={100}
-                    layout="fill"
-                    objectFit="cover"
+                    fill={true}
+                    style={{ objectFit: "cover" }}
                 />
             </div>
 
