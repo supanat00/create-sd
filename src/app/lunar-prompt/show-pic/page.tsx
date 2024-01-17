@@ -14,7 +14,7 @@ const Showpic: React.FC = () => {
                 const response = await fetch(
                     '/api/get-img',
                     {
-                        next: { revalidate: 1 }
+                        next: { revalidate: 0 }
                     }
                 );
 

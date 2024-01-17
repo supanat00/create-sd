@@ -13,7 +13,7 @@ const Loading: React.FC = () => {
                 const response = await fetch(
                     '/api/get-img',
                     {
-                        next: { revalidate: 1 }
+                        next: { revalidate: 0 }
                     }
                 );
                 const imageData = await response.json();
