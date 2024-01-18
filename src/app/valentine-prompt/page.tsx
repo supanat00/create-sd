@@ -60,7 +60,7 @@ export default function Page() {
 
             // console.log('text_prompts:', textPrompts);
 
-            console.log('Generating...');
+            console.log('Generating... : valentineday-wallpaper');
 
             const responseData = await response.json();
 

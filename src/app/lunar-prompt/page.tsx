@@ -10,7 +10,13 @@ import Image from 'next/image'
 import background from "../../../public/UI/lunarday/lunarday-theme.png";
 
 export default function Page() {
-    const themes = ["(lunar new year, Pop art)", "(lunar new year, Graphic,minimal)", "(lunar new year, Abstract)", "(lunar new year, unreal engine, art station)", "(lunar new year, photography)"];
+    const themes = [
+        "(lunar new year, Pop art)",
+        "(lunar new year, Graphic,minimal)",
+        "(lunar new year, Abstract)",
+        "(lunar new year, unreal engine, art station)",
+        "(lunar new year, photography)"
+    ];
 
     const [generating, setGenerating] = useState(false);
 
@@ -30,15 +36,18 @@ export default function Page() {
         try {
             setGenerating(true); // เริ่ม generate
 
+            const negative = "no text, no typography, no split frame"
+
             // สุ่มคำธีมจากอาเรย์
             const randomTheme = themes[Math.floor(Math.random() * themes.length)];
 
             // สร้าง text_prompts
             const textPrompts = [
-                { "text": text1, "weight": 1 },
-                { "text": text2, "weight": 1 },
-                { "text": text3, "weight": 1 },
+                { "text": text1 || "``", "weight": 1 },
+                { "text": text2 || "``", "weight": 1 },
+                { "text": text3 || "``", "weight": 1 },
                 { "text": randomTheme, "weight": 1 },
+                { "text": negative, "weight": -1 },
             ];
 
             const response = await fetch('/api/stable-diffusion', {
@@ -51,7 +60,9 @@ export default function Page() {
                 }),
             });
 
-            console.log('text_prompts:', textPrompts);
+            // console.log('text_prompts:', textPrompts);
+
+            console.log('Generating... : lunarday-wallpaper');
 
             const responseData = await response.json();
 
@@ -93,7 +104,7 @@ export default function Page() {
                         placeholder="Keyword 01"
                         value={text1}
                         onChange={(e) => handleTextChange(setText1, e.target.value)}
-                        className={`rounded-full mt-10 text-center p-6 text-3xl m-2 font-semibold shadow-2xl`}
+                        className={`rounded-full mt-10 text-center p-6 text-3xl m-2 font-semibold shadow-2xl ${generating ? 'pointer-events-none' : ''}`}
                         disabled={generating}
                     />
 
@@ -102,7 +113,7 @@ export default function Page() {
                         placeholder="Keyword 02"
                         value={text2}
                         onChange={(e) => handleTextChange(setText2, e.target.value)}
-                        className={`rounded-full text-center p-6 text-3xl mx-26 m-2 font-semibold shadow-2xl`}
+                        className={`rounded-full text-center p-6 text-3xl mx-26 m-2 font-semibold shadow-2xl ${generating ? 'pointer-events-none' : ''}`}
                         disabled={generating}
                     />
 
@@ -111,7 +122,7 @@ export default function Page() {
                         placeholder="Keyword 03"
                         value={text3}
                         onChange={(e) => handleTextChange(setText3, e.target.value)}
-                        className={`rounded-full text-center p-6 text-3xl m-2 font-semibold shadow-2xl`}
+                        className={`rounded-full text-center p-6 text-3xl m-2 font-semibold shadow-2xl ${generating ? 'pointer-events-none' : ''}`}
                         disabled={generating}
                     />
                 </div>
