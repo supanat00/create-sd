@@ -36,6 +36,8 @@ export default function Page() {
         try {
             setGenerating(true); // เริ่ม generate
 
+            router.push('/lunar-prompt/show-pic');
+
             const negative = "no text, no typography, no split frame"
 
             // สุ่มคำธีมจากอาเรย์
@@ -65,8 +67,6 @@ export default function Page() {
             console.log('Generating... : lunarday-wallpaper');
 
             const responseData = await response.json();
-
-            router.push('/lunar-prompt/show-pic');
 
         } catch (error) {
             console.error('Error fetching data:', error);
