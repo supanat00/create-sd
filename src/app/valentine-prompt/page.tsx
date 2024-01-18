@@ -32,9 +32,7 @@ export default function Page() {
 
     const generateImage = async () => {
         try {
-            setGenerating(true); // เริ่ม generate
-
-            router.push('/valentine-prompt/show-pic');
+            setGenerating(true); // เริ่ม generate            
 
             const negative = "no text, no typography, no split frame"
 
@@ -65,6 +63,8 @@ export default function Page() {
             console.log('Generating... : valentineday-wallpaper');
 
             const responseData = await response.json();
+
+            router.push('/valentine-prompt/show-pic');
 
         } catch (error) {
             console.error('Error fetching data:', error);
