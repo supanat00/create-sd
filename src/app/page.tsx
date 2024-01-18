@@ -20,21 +20,21 @@ export default function Page() {
   const [isRightHovered, setIsRightHovered] = useState<boolean | false>(true);
 
   // 2. สร้าง function เพื่อเปลี่ยนแปลง state เมื่อ div ถูก hover หรือไม่ถูก hover
-  const handleLeftHover = () => {
+  const handleLeftHover = async () => {
     setIsLeftHovered(true);
     setIsRightHovered(false);
   };
 
-  const handleLeftLeave = () => {
+  const handleLeftLeave = async () => {
     setIsLeftHovered(false);
   };
 
-  const handleRightHover = () => {
+  const handleRightHover = async () => {
     setIsRightHovered(true);
     setIsLeftHovered(false);
   };
 
-  const handleRightLeave = () => {
+  const handleRightLeave = async () => {
     setIsRightHovered(false);
   };
 
