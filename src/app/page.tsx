@@ -16,38 +16,19 @@ import siamcenter from "../../public/UI/home/siam-center.png";
 export default function Page() {
   const router = useRouter();
 
-  const [isLeftHovered, setIsLeftHovered] = useState<boolean | false>(false);
-  const [isRightHovered, setIsRightHovered] = useState<boolean | false>(false);
+  // State to track which side is hovered
+  const [hoveredSide, setHoveredSide] = useState<string | null>(null);
 
-  // 2. สร้าง function เพื่อเปลี่ยนแปลง state เมื่อ div ถูก hover หรือไม่ถูก hover
-  const handleLeftHover = () => {
-    setIsLeftHovered(true);
-    setIsRightHovered(false);
+  // Function to handle the hover and set the hovered side
+  const handleHover = (side: string) => {
+    setHoveredSide(side);
   };
-
-  const handleLeftLeave = () => {
-    setIsLeftHovered(false);
-  };
-
-  const handleRightHover = () => {
-    setIsRightHovered(true);
-    setIsLeftHovered(false);
-  };
-
-  const handleRightLeave = () => {
-    setIsRightHovered(false);
-  };
-
-  // 3. ใช้ state เพื่อกำหนด `opacity` ของ div ที่ไม่มี `bg-black`
-  const leftOpacity = isRightHovered ? 75 : 0;
-  const rightOpacity = isLeftHovered ? 75 : 0;
-
-
 
   // Function to handle the click and navigate to the specified route
   const handleButtonClick = (route: string) => {
     router.push(route);
   };
+
 
   return (
     <div>
@@ -67,21 +48,24 @@ export default function Page() {
       <div className="flex h-screen">
         {/* Left side */}
         <div
-          className={`flex-1 bg-black relative opacity-${leftOpacity}`}
-          onMouseEnter={handleLeftHover}
-          onMouseLeave={handleLeftLeave}
+          className={`flex-1 bg-black relative ${hoveredSide === 'left' ? 'opacity-0' : 'opacity-75'}`}
+          onMouseEnter={() => handleHover('left')}
+          onMouseLeave={() => handleHover(null as unknown as string)}
           onClick={() => handleButtonClick('/valentine-prompt')}
-        ></div>
+        >
+
+        </div>
 
         {/* Right side */}
         <div
-          className={`flex-1 bg-black relative opacity-${rightOpacity}`}
-          onMouseEnter={handleRightHover}
-          onMouseLeave={handleRightLeave}
+          className={`flex-1 bg-black relative ${hoveredSide === 'right' ? 'opacity-0' : 'opacity-75'}`}
+          onMouseEnter={() => handleHover('right')}
+          onMouseLeave={() => handleHover(null as unknown as string)}
           onClick={() => handleButtonClick('/lunar-prompt')}
-        ></div>
-      </div>
+        >
 
+        </div>
+      </div>
 
       {/* dragon */}
       <div className={`absolute top-20 left-1/2 transform -translate-x-1/2`}>
