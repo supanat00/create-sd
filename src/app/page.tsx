@@ -38,9 +38,13 @@ export default function Page() {
     setIsRightHovered(false);
   };
 
-  // 3. ใช้ state เพื่อกำหนด `opacity` ของ div ที่ไม่มี `bg-black`
-  const leftOpacity = isRightHovered ? 75 : 0;
-  const rightOpacity = isLeftHovered ? 75 : 0;
+  const leftStyle = {
+    opacity: isRightHovered ? 0.75 : 0
+  };
+
+  const rightStyle = {
+    opacity: isLeftHovered ? 0.75 : 0,
+  };
 
 
 
@@ -67,7 +71,8 @@ export default function Page() {
       <div className="flex h-screen">
         {/* Left side */}
         <div
-          className={`flex-1 bg-black relative opacity-${leftOpacity}`}
+          className={`flex-1 bg-black relative`}
+          style={leftStyle}
           onMouseEnter={handleLeftHover}
           onMouseLeave={handleLeftLeave}
           onClick={() => handleButtonClick('/valentine-prompt')}
@@ -75,7 +80,8 @@ export default function Page() {
 
         {/* Right side */}
         <div
-          className={`flex-1 bg-black relative opacity-${rightOpacity}`}
+          className={`flex-1 bg-black relative`}
+          style={rightStyle}
           onMouseEnter={handleRightHover}
           onMouseLeave={handleRightLeave}
           onClick={() => handleButtonClick('/lunar-prompt')}
