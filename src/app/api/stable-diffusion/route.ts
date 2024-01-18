@@ -3,6 +3,9 @@ import fetch from 'node-fetch'
 import { v2 as cloudinary } from "cloudinary";
 import { PrismaClient } from '@prisma/client';
 
+import { NextRequest } from 'next/server'
+
+
 const prisma = new PrismaClient();
 
 interface TextToImageResponse {
@@ -23,7 +26,40 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function POST(req: Request) {
+export async function GET(req: Request) {
+    try {
+        // Connect to the database
+        await prisma.$connect();
+
+        // Fetch the latest image data from the database
+        const latestImageData = await prisma.postering.findFirst({
+            orderBy: { id: 'desc' }, // Order by id in descending order to get the latest entry
+        });
+
+        // Check if there is any data
+        if (!latestImageData) {
+            return new Response('No image data found', { status: 404 });
+        }
+
+        // Get the 'cloudinaryUrl' from the latestImageData
+        const cloudinaryUrl = latestImageData.photo;
+
+        // Disconnect from the database
+        await prisma.$disconnect();
+
+        return new Response(JSON.stringify({ cloudinaryUrl }), {
+            status: 200,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    } catch (error) {
+        console.error('Error fetching image data:', error);
+        return new Response('Internal Server Error', { status: 500 });
+    }
+}
+
+export async function POST(request: NextRequest): Promise<any> {
     try {
         const engineId = 'stable-diffusion-xl-1024-v1-0'
         const apiHost = process.env.API_HOST ?? 'https://api.stability.ai'
@@ -32,7 +68,7 @@ export async function POST(req: Request) {
         if (!apiKey) throw new Error('Missing Stability API key.')
 
         // ดึงข้อมูล text_prompts จาก body ของ request
-        const { text_prompts } = await req.json();
+        const { text_prompts } = await request.json();
 
         const response = await fetch(
             `${apiHost}/v1/generation/${engineId}/text-to-image`,

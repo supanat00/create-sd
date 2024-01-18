@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 // Assets 
 import background from "../../../../public/UI/show-img/show_image_bg.png";
 import qr from "../../../../public/UI/show-img/scan-qr.png";
+import strawberry from "../../../../public/UI/show-img/asset01.png";
 
 export default function Page() {
     const router = useRouter();
@@ -25,7 +26,7 @@ export default function Page() {
         const fetchImageData = async () => {
             try {
                 const response = await fetch(
-                    '/api/get-img',
+                    '/api/stable-diffusion',
                     {
                         next: { revalidate: 0 }
                     }
@@ -64,6 +65,13 @@ export default function Page() {
 
             {/* Show-Img */}
             <div className={`absolute top-20 mt-5 left-80 ml-28`}>
+                <Image
+                    src={strawberry}
+                    alt="Generated Image"
+                    className={`absolute bottom-1.5 -mb-28 left-80 ml-10 `}
+                    width={360}
+                    height={100}
+                />
                 {loading ? (
                     // {/* // แสดง Loader หรือข้อความ "Loading..." */}
                     <div className={`absolute top-80 mt-5 left-40 `}>
@@ -91,13 +99,13 @@ export default function Page() {
 
                 {/* ปุ่มตกลง */}
                 {showButtons && (
-                    <div className={`absolute top-60 right-28`}>
+                    <div className={`absolute top-80 right-28`}>
                         <div
                             className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
                         </div>
                         <button
                             onClick={() => setShowButtons(false)}
-                            className="relative inline-flex items-center justify-center px-32 py-4 text-4xl font-bold text-white transition-all duration-200 bg-gray-950 font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
+                            className="relative inline-flex items-center justify-center px-36 py-6 text-4xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
                         >
                             ตกลง
                         </button>
@@ -105,12 +113,12 @@ export default function Page() {
                 )}
                 {/* ปุ่มสร้างรูปภาพอีกครั้ง */}
                 {showButtons && (
-                    <div className={`absolute top-96 right-10`}>
+                    <div className={`absolute top-96 mt-20 right-28`}>
                         <div
                             className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
                         </div>
                         <button
-                            className="relative inline-flex items-center justify-center px-32 py-4 text-4xl font-bold text-white transition-all duration-200 bg-gray-950 font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full whitespace-nowrap"
+                            className="relative inline-flex items-center justify-center px-16 py-6 text-4xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full whitespace-nowrap"
                         >
                             สร้างภาพอีกครั้ง
                         </button>
@@ -142,19 +150,14 @@ export default function Page() {
                             </div>
                             <button
                                 onClick={() => handleButtonClick('/')}
-                                className="relative inline-flex items-center justify-center px-32 py-4 text-4xl font-bold text-white transition-all duration-200 bg-gray-950 font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
+                                className="relative inline-flex items-center justify-center px-32 py-4 text-4xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
                             >
                                 เล่นอีกครั้ง
                             </button>
                         </div>
                     </>
                 )}
-
             </div>
-
-
-
-
         </div>
     )
 

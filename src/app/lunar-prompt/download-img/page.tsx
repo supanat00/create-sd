@@ -11,7 +11,7 @@ const Loading: React.FC = () => {
         const fetchImageData = async () => {
             try {
                 const response = await fetch(
-                    '/api/get-img',
+                    '/api/stable-diffusion',
                     {
                         next: { revalidate: 0 }
                     }
