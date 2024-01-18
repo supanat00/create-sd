@@ -5,9 +5,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "res.cloudinary.com",
-        port: "",
-        pathname: "/da8eemrq8/**",
+        hostname: "**",
       },
     ],
   },

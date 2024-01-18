@@ -94,6 +94,7 @@ export default function Page() {
                         value={text1}
                         onChange={(e) => handleTextChange(setText1, e.target.value)}
                         className={`rounded-full mt-10 text-center p-6 text-3xl m-2 font-semibold shadow-2xl`}
+                        disabled={generating}
                     />
 
                     <input
@@ -102,6 +103,7 @@ export default function Page() {
                         value={text2}
                         onChange={(e) => handleTextChange(setText2, e.target.value)}
                         className={`rounded-full text-center p-6 text-3xl mx-26 m-2 font-semibold shadow-2xl`}
+                        disabled={generating}
                     />
 
                     <input
@@ -110,6 +112,7 @@ export default function Page() {
                         value={text3}
                         onChange={(e) => handleTextChange(setText3, e.target.value)}
                         className={`rounded-full text-center p-6 text-3xl m-2 font-semibold shadow-2xl`}
+                        disabled={generating}
                     />
                 </div>
             </div>

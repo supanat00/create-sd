@@ -2,22 +2,47 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react';
+
+// css
 import styles from "./styles.module.css";
+
+// Assets
 import background from "../../public/UI/home/home-bg.png";
 import centerbuttom from "../../public/UI/home/choose-button.png";
 import headtext from "../../public/UI/home/header-texts.png";
 import yearofdragon from "../../public/UI/home/year_of_the_dragon.png";
+import siamcenter from "../../public/UI/home/siam-center.png";
 
 export default function Page() {
   const router = useRouter();
 
-  // State to track which side is hovered
-  const [hoveredSide, setHoveredSide] = useState<string | null>(null);
+  const [isLeftHovered, setIsLeftHovered] = useState<boolean | false>(false);
+  const [isRightHovered, setIsRightHovered] = useState<boolean | false>(false);
 
-  // Function to handle the hover and set the hovered side
-  const handleHover = (side: string) => {
-    setHoveredSide(side);
+  // 2. สร้าง function เพื่อเปลี่ยนแปลง state เมื่อ div ถูก hover หรือไม่ถูก hover
+  const handleLeftHover = () => {
+    setIsLeftHovered(true);
+    setIsRightHovered(false);
   };
+
+  const handleLeftLeave = () => {
+    setIsLeftHovered(false);
+  };
+
+  const handleRightHover = () => {
+    setIsRightHovered(true);
+    setIsLeftHovered(false);
+  };
+
+  const handleRightLeave = () => {
+    setIsRightHovered(false);
+  };
+
+  // 3. ใช้ state เพื่อกำหนด `opacity` ของ div ที่ไม่มี `bg-black`
+  const leftOpacity = isRightHovered ? 75 : 0;
+  const rightOpacity = isLeftHovered ? 75 : 0;
+
+
 
   // Function to handle the click and navigate to the specified route
   const handleButtonClick = (route: string) => {
@@ -42,24 +67,21 @@ export default function Page() {
       <div className="flex h-screen">
         {/* Left side */}
         <div
-          className={`flex-1 bg-black relative ${hoveredSide === 'left' ? 'opacity-0' : 'opacity-75'}`}
-          onMouseEnter={() => handleHover('left')}
-          onMouseLeave={() => handleHover(null as unknown as string)}
+          className={`flex-1 bg-black relative opacity-${leftOpacity}`}
+          onMouseEnter={handleLeftHover}
+          onMouseLeave={handleLeftLeave}
           onClick={() => handleButtonClick('/valentine-prompt')}
-        >
-
-        </div>
+        ></div>
 
         {/* Right side */}
         <div
-          className={`flex-1 bg-black relative ${hoveredSide === 'right' ? 'opacity-0' : 'opacity-75'}`}
-          onMouseEnter={() => handleHover('right')}
-          onMouseLeave={() => handleHover(null as unknown as string)}
+          className={`flex-1 bg-black relative opacity-${rightOpacity}`}
+          onMouseEnter={handleRightHover}
+          onMouseLeave={handleRightLeave}
           onClick={() => handleButtonClick('/lunar-prompt')}
-        >
-
-        </div>
+        ></div>
       </div>
+
 
       {/* dragon */}
       <div className={`absolute top-20 left-1/2 transform -translate-x-1/2`}>
@@ -91,6 +113,17 @@ export default function Page() {
           src={centerbuttom}
           width={120}
           height={120}
+          z-index={"1"}
+        />
+      </div>
+
+      {/* siamcenter */}
+      <div className={`absolute right-11 bottom-10 transform -translate-x-1/2 `}>
+        <Image
+          alt="Center Button Image"
+          src={siamcenter}
+          width={250}
+          height={250}
           z-index={"1"}
         />
       </div>

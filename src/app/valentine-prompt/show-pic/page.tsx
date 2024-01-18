@@ -129,7 +129,7 @@ export default function Page() {
                         />
                         <div className={`absolute top-48 mt-2 right-28`}>
                             <Image
-                                src="/generated_images/load-test.png"
+                                src="/generated_images/GGlink.png"
                                 alt="Generated Image"
                                 className="rounded-3xl shadow-md"
                                 width={470}
