@@ -11,11 +11,10 @@ import background from "../../../public/UI/lunarday/lunarday-theme.png";
 
 export default function Page() {
     const themes = [
-        "(lunar new year, Pop art)",
-        "(lunar new year, Graphic,minimal)",
-        "(lunar new year, Abstract)",
-        "(lunar new year, unreal engine, art station)",
-        "(lunar new year, photography)"
+        "(Lunar newyear theme::wallpaper)",
+        "(Lunar newyear theme::Wallpaper :: graphic design :: Simple clean art :: minimal style :: decor shape art )",
+        "(Lunar newyear theme::Geometric :: Abstract Art :: distorted shapes )",
+        "(Lunar newyear theme::wallpaper :: High Detail :: Unreal Engine Render :: 3D Art style)",
     ];
 
     const [generating, setGenerating] = useState(false);

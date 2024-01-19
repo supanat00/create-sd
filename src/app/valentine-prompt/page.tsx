@@ -12,8 +12,9 @@ import background from "../../../public/UI/valentine/valentine-theme.png";
 export default function Page() {
     const themes = [
         "(Valentine theme:: wallpaper)",
-        "(Valentine theme :: Geometric :: Abstract Art :: distorted shapes )",
-        "(Valentine theme:wallpaper: High Detail : Unreal Engine Render : 3D Art style)",
+        "(Valentine theme:: Wallpaper :: graphic design :: Simple clean art :: minimal style :: decor shape art )",
+        "(Valentine theme:: Geometric :: Abstract Art :: distorted shapes )",
+        "(Valentine theme:: wallpaper :: High Detail :: Unreal Engine Render :: 3D Art style)",
     ];
 
     const [generating, setGenerating] = useState(false);

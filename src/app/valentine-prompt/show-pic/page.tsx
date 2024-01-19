@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 import background from "../../../../public/UI/show-img/show_image_bg.png";
 import qr from "../../../../public/UI/show-img/scan-qr.png";
 import strawberry from "../../../../public/UI/show-img/asset01.png";
+import lolipop from "../../../../public/UI/show-img/asset02.png";
 
 export default function Page() {
     const router = useRouter();
@@ -50,7 +51,7 @@ export default function Page() {
     }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
 
     return (
-        <div>
+        <div className={styles.bgWrap}>
             {/* background */}
             <div className={styles.bgWrap}>
                 <Image
@@ -63,15 +64,29 @@ export default function Page() {
                 />
             </div>
 
-            {/* Show-Img */}
-            <div className={`absolute top-20 mt-5 left-80 ml-28`}>
+            {/* Assets */}
+            <div className={`absolute left-96 ml-96 top-80 mt-96 z-40`}>
                 <Image
                     src={strawberry}
                     alt="Generated Image"
-                    className={`absolute bottom-1.5 -mb-28 left-80 ml-10 `}
+                    className={`mt-40 top-10 ml-8 relative overflow-hidden`}
                     width={360}
                     height={100}
                 />
+            </div>
+
+            <div className={`absolute top-96 -ml-72 z-40`}>
+                <Image
+                    src={lolipop}
+                    alt="Generated Image"
+                    className={`mt-12 top-96 ml-2 relative overflow-hidden`}
+                    width={890}
+                    height={100}
+                />
+            </div>
+
+            {/* Show-Img */}
+            <div className={`absolute top-20 mt-5 left-80 ml-28`}>
                 {loading ? (
                     // {/* // แสดง Loader หรือข้อความ "Loading..." */}
                     <div className={`absolute top-80 mt-5 left-40 `}>
