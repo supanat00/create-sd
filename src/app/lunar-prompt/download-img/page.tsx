@@ -102,13 +102,13 @@ const Loading: React.FC = () => {
                     <Image
                         src={cloudinaryUrl}
                         alt="Generated Image"
-                        className="absolute rounded-lg shadow-md left-1/2 -translate-x-1/2"
+                        className="absolute mt-8 rounded-lg shadow-md left-1/2 -translate-x-1/2"
                         width={450}
                         height={100}
                     />
                 ) : null}
                 {/* Share Button */}
-                <div className={`absolute inline-flex  group left-1/2 bottom-56 transform -translate-x-1/2`}>
+                <div className={`absolute inline-flex  group left-1/2 bottom-32 transform -translate-x-1/2`}>
                     <div
                         className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
                     </div>
@@ -121,7 +121,7 @@ const Loading: React.FC = () => {
                 </div>
 
                 {/* Download Button */}
-                <div className={`absolute inline-flex  group left-1/2 bottom-40 transform -translate-x-1/2`}>
+                <div className={`absolute inline-flex  group left-1/2 bottom-16 transform -translate-x-1/2`}>
                     <div
                         className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
                     </div>
