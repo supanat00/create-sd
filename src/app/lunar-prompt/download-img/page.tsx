@@ -87,11 +87,11 @@ const Loading: React.FC = () => {
                     </div>
                 ) : cloudinaryUrl ? (
                     // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
-                    <div className={`absolute left-1/2 transform -translate-x-1/2 h-dvh w-dvw items-center flex justify-center`}>
+                    <div className={`absolute left-1/2 transform -translate-x-1/2 h-dvh w-dvw items-center justify-center`}>
                         <Image
                             src={cloudinaryUrl}
                             alt="Generated Image"
-                            className={`absolute rounded-lg shadow-md`}
+                            className={`relative rounded-lg shadow-md`}
                             width={450}
                             height={100}
                         />
