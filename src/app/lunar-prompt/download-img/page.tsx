@@ -5,7 +5,7 @@ import styles from "../../styles.module.css";
 import Image from 'next/image';
 
 // Assets 
-import background from "../../../../public/UI/lunarday/lunarday-theme.png";
+import background from "../../../../public/UI/home/home-bg.png";
 
 const Loading: React.FC = () => {
     const [loading, setLoading] = useState(true);
