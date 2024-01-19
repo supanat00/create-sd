@@ -85,16 +85,14 @@ const Loading: React.FC = () => {
                         </div>
                     </div>
                 ) : cloudinaryUrl ? (
-                    // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
-                    <div className={`absolute`}>
-                        <Image
-                            src={cloudinaryUrl}
-                            alt="Generated Image"
-                            className="rounded-lg shadow-md"
-                            width={450}
-                            height={100}
-                        />
-                    </div>
+                    // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น                    
+                    <Image
+                        src={cloudinaryUrl}
+                        alt="Generated Image"
+                        className="rounded-lg shadow-md"
+                        width={450}
+                        height={100}
+                    />
                 ) : null}
             </div>
         </main>
