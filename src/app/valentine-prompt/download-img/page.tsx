@@ -84,6 +84,7 @@ const Loading: React.FC = () => {
                         src={background}
                         quality={100}
                         fill={true}
+                        className={`blur-2xl`}
                         style={{ objectFit: "cover" }}
                     />
                 </div>
