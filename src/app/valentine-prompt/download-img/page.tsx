@@ -74,7 +74,7 @@ const Loading: React.FC = () => {
 
     return (
         <div className={styles.bgWrap}>
-            <div className={`absolute h-screen w-screen`}>
+            <div className={`absolute h-screen w-screen place-content-center`}>
                 {loading ? (
                     // {/* // แสดง Loader หรือข้อความ "Loading..." */}
                     <div className={`absolute left-1/2 bottom-1/2 transform -translate-x-1/2`}>
@@ -87,11 +87,11 @@ const Loading: React.FC = () => {
                     </div>
                 ) : cloudinaryUrl ? (
                     // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
-                    <div className={`absolute left-1/2  transform -translate-x-1/2 top-1/2 -translate-y-1/2`}>
+                    <div className={`absolute left-1/2 transform -translate-x-1/2 h-dvh w-dvw items-center flex justify-center`}>
                         <Image
                             src={cloudinaryUrl}
                             alt="Generated Image"
-                            className={`rounded-lg shadow-md`}
+                            className={`absolute rounded-lg shadow-md`}
                             width={450}
                             height={100}
                         />
