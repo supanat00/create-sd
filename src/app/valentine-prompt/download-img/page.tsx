@@ -1,7 +1,11 @@
 // Loading.tsx
 "use client"
 import { useEffect, useState } from 'react';
+import styles from "../../styles.module.css";
 import Image from 'next/image';
+
+// Assets 
+import background from "../../../../public/UI/lunarday/lunarday-theme.png";
 
 const Loading: React.FC = () => {
     const [loading, setLoading] = useState(true);
@@ -31,49 +35,32 @@ const Loading: React.FC = () => {
         };
 
         fetchImageData();
-    }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
+    }, []);
 
-    // useEffect(() => {
-    //     const handleDownload = async () => {
-    //         try {
-    //             if (cloudinaryUrl) {
-    //                 // Fetch the image data from Cloudinary
-    //                 const response = await fetch(cloudinaryUrl);
+    const handleShare = () => {
+        // Implement sharing functionality here
+        alert('Share functionality will be implemented here.');
+    };
 
-    //                 if (response.ok) {
-    //                     // Convert the response to a Blob
-    //                     const blob = await response.blob();
-
-    //                     // Create a URL for the Blob
-    //                     const blobUrl = URL.createObjectURL(blob);
-
-    //                     // Create a download link
-    //                     const downloadLink = document.createElement('a');
-    //                     downloadLink.href = blobUrl;
-    //                     downloadLink.download = 'wallpaper_theme_lunarday.png';
-
-    //                     // Click the link to trigger the download
-    //                     downloadLink.click();
-    //                 } else {
-    //                     console.error('Error fetching image:', response.statusText);
-    //                 }
-    //             }
-    //         } catch (error) {
-    //             console.error('Error downloading image:', error);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-
-    //     // Trigger download when the image is loaded
-    //     if (!loading && cloudinaryUrl) {
-    //         handleDownload();
-    //     }
-    // }, [loading, cloudinaryUrl]);
+    const handleDownload = () => {
+        // Implement re-download functionality here
+        alert('Re-download functionality will be implemented here.');
+    };
 
     return (
-        <main className="max-w-screen-xl mx-auto flex justify-center items-center">
-            <div className="flex-1">
+        <main className="max-w-screen-xl  justify-center items-center">
+
+            <div >
+                {/* background */}
+                <div className={styles.bgWrap}>
+                    <Image
+                        alt="Background Image"
+                        src={background}
+                        quality={100}
+                        fill={true}
+                        style={{ objectFit: "cover" }}
+                    />
+                </div>
                 {loading ? (
                     // แสดง Loader หรือข้อความ "Loading..."
                     <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}>
@@ -89,11 +76,37 @@ const Loading: React.FC = () => {
                     <Image
                         src={cloudinaryUrl}
                         alt="Generated Image"
-                        className="rounded-lg shadow-md"
+                        className="absolute rounded-lg shadow-md left-1/2 -translate-x-1/2"
                         width={450}
                         height={100}
                     />
                 ) : null}
+                {/* Share Button */}
+                <div className={`absolute inline-flex  group left-1/2 bottom-72 transform -translate-x-1/2`}>
+                    <div
+                        className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
+                    </div>
+                    <button
+                        onClick={handleShare}
+                        className="relative inline-flex items-center justify-center px-20 py-2 text-xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
+                    >
+                        Share
+                    </button>
+                </div>
+
+                {/* Download Button */}
+                <div className={`absolute inline-flex  group left-1/2 bottom-56 transform -translate-x-1/2`}>
+                    <div
+                        className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
+                    </div>
+                    <button
+                        onClick={handleDownload}
+                        className="relative inline-flex items-center justify-center px-14 py-2 text-xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
+
+                    >
+                        Download
+                    </button>
+                </div>
             </div>
         </main>
     );
