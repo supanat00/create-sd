@@ -13,7 +13,7 @@ const Loading: React.FC = () => {
                 const response = await fetch(
                     '/api/stable-diffusion',
                     {
-                        next: { revalidate: 2 }
+                        next: { revalidate: 0 }
                     }
                 );
                 const imageData = await response.json();
@@ -72,7 +72,7 @@ const Loading: React.FC = () => {
     }, [loading, cloudinaryUrl]);
 
     return (
-        <main className="mt-8 max-w-screen-xl mx-auto flex justify-center items-center">
+        <main className="mt-8 text-center max-w-screen-xl mx-auto flex justify-center items-center">
             <div className="flex-1">
                 {loading ? (
                     // แสดง Loader หรือข้อความ "Loading..."
