@@ -73,30 +73,29 @@ const Loading: React.FC = () => {
     // }, [loading, cloudinaryUrl]);
 
     return (
-        <main className={styles.bgWrap}>
-            <div className="flex-1">
-                {loading ? (
-                    // {/* // แสดง Loader หรือข้อความ "Loading..." */}
-                    <div className={`absolute top-80 mt-5 left-40 `}>
-                        <div className="loader">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
+        <div className="flex-1">
+            {loading ? (
+                // {/* // แสดง Loader หรือข้อความ "Loading..." */}
+                <div className={`absolute top-80 mt-5 left-40 `}>
+                    <div className="loader">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
-                ) : cloudinaryUrl ? (
-                    // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
-                    <Image
-                        src={cloudinaryUrl}
-                        alt="Generated Image"
-                        className="rounded-lg shadow-md mb-8"
-                        width={450}
-                        height={100}
-                    />
-                ) : null}
-            </div>
-        </main>
+                </div>
+            ) : cloudinaryUrl ? (
+                // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
+                <Image
+                    src={cloudinaryUrl}
+                    alt="Generated Image"
+                    className="rounded-lg shadow-md mb-8"
+                    width={450}
+                    height={100}
+                />
+            ) : null}
+        </div>
+
     );
 };
 
