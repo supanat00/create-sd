@@ -4,6 +4,10 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
+  --yellow: #feb60a;
+  --red: #ff0062;
+  --blue: #00dbf9;
+  --violet: #da00f7;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,4 +68,80 @@
   background: #f1f1f1;
   border: solid white 10px;
   border-radius: 50%;
+}
+
+div.containerl2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div > div.l2 {
+  width: 3vw;
+  height: 3vw;
+  border-radius: 100%;
+  margin: 2vw;
+  background-image: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  animation: bounce 1.5s 0.5s linear infinite;
+}
+.l2.yellow {
+  background-color: var(--yellow);
+}
+
+.l2.red {
+  background-color: var(--red);
+  animation-delay: 0.1s;
+}
+
+.l2.blue {
+  background-color: var(--blue);
+  animation-delay: 0.2s;
+}
+
+.l2.violet {
+  background-color: var(--violet);
+  animation-delay: 0.3s;
+}
+
+@keyframes bounce {
+  0%,
+  50%,
+  100% {
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  25% {
+    transform: scale(0.6);
+    filter: blur(3px);
+  }
+  75% {
+    filter: blur(3px);
+    transform: scale(1.4);
+  }
+}
+
+.animate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: auto;
+  animation: load 1.2s infinite 0s ease-in-out;
+  animation-direction: alternate;
+  text-shadow: 0 0 1px white;
+}
+
+@keyframes load {
+  0% {
+    opacity: 0.08;
+
+    filter: blur(5px);
+    letter-spacing: 3px;
+  }
+  100% {
+  }
 }

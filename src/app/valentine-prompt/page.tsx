@@ -69,19 +69,18 @@ export default function Page() {
 
         } catch (error) {
             console.error('Error fetching data:', error);
-        } finally {
-            setGenerating(false); // สิ้นสุดการ generate
         }
     }
 
+    const isInputValid = text1.trim() !== '' || text2.trim() !== '' || text3.trim() !== '';
+
     return (
-        <div>
+        <div className={styles.bgWrap}>
             {/* background */}
             <div className={styles.bgWrap}>
                 <Image
                     alt="Background Image"
                     src={background}
-                    placeholder="blur"
                     quality={100}
                     fill={true}
                     style={{ objectFit: "cover" }}
@@ -104,6 +103,7 @@ export default function Page() {
                         value={text1}
                         onChange={(e) => handleTextChange(setText1, e.target.value)}
                         className={`rounded-full mt-10 text-center p-6 text-3xl m-2 font-semibold shadow-2xl ${generating ? 'pointer-events-none' : ''}`}
+                        disabled={generating}
                     />
 
                     <input
@@ -112,6 +112,7 @@ export default function Page() {
                         value={text2}
                         onChange={(e) => handleTextChange(setText2, e.target.value)}
                         className={`rounded-full text-center p-6 text-3xl mx-26 m-2 font-semibold shadow-2xl ${generating ? 'pointer-events-none' : ''}`}
+                        disabled={generating}
                     />
 
                     <input
@@ -120,6 +121,7 @@ export default function Page() {
                         value={text3}
                         onChange={(e) => handleTextChange(setText3, e.target.value)}
                         className={`rounded-full text-center p-6 text-3xl m-2 font-semibold shadow-2xl ${generating ? 'pointer-events-none' : ''}`}
+                        disabled={generating}
                     />
                 </div>
             </div>
@@ -132,14 +134,33 @@ export default function Page() {
                 </div>
                 <button
                     onClick={generateImage}
-                    className="relative inline-flex items-center justify-center px-32 py-4 text-4xl font-bold text-white transition-all duration-200 bg-gray-950 font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
-                    disabled={generating}
+                    className="relative inline-flex items-center justify-center px-32 py-4 text-4xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
+                    disabled={!isInputValid || generating}
                 >
-                    {generating ? 'Generating...' : 'ตกลง'}
+                    {generating ? 'Generating' : 'ตกลง'}
                 </button>
             </div>
 
-
+            {/* Loading */}
+            {generating && (
+                <div className={`loading2 absolute h-screen w-screen`}>
+                    <Image
+                        alt="Background Image"
+                        src={background}
+                        quality={100}
+                        className={`blur-lg`}
+                        fill={true}
+                        style={{ objectFit: "cover" }}
+                    />
+                    <div className="containerl2 absolute left-1/2 bottom-1/2 transform -translate-x-1/2">
+                        <div className="l2 yellow"></div>
+                        <div className="l2 red"></div>
+                        <div className="l2 blue"></div>
+                        <div className="l2 violet"></div>
+                    </div>
+                    <h2 className="animate relative text-4xl top-28 text-white ">Loading . . .</h2>
+                </div>
+            )}
         </div>
 
     );
