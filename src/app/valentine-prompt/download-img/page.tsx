@@ -50,7 +50,7 @@ const Loading: React.FC = () => {
     //                     // Create a download link
     //                     const downloadLink = document.createElement('a');
     //                     downloadLink.href = blobUrl;
-    //                     downloadLink.download = 'wallpaper_theme_valentine.png';
+    //                     downloadLink.download = 'wallpaper_theme_lunarday.png';
 
     //                     // Click the link to trigger the download
     //                     downloadLink.click();
@@ -72,28 +72,29 @@ const Loading: React.FC = () => {
     // }, [loading, cloudinaryUrl]);
 
     return (
-        <main className="max-w-screen-xl mx-auto flex justify-center items-center">
-            {loading ? (
-                // แสดง Loader หรือข้อความ "Loading..."
-                <div className={`absolute top-80`}>
-                    <div className="loader">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+        <main className="mt-8 max-w-screen-xl mx-auto flex justify-center items-center">
+            <div className="flex-1">
+                {loading ? (
+                    // แสดง Loader หรือข้อความ "Loading..."
+                    <div className={`absolute top-80`}>
+                        <div className="loader">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
                     </div>
-                </div>
-            ) : cloudinaryUrl ? (
-                // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
-                <Image
-                    src={cloudinaryUrl}
-                    alt="Generated Image"
-                    className="rounded-lg shadow-md"
-                    width={450}
-                    height={100}
-                />
-            ) : null}
-
+                ) : cloudinaryUrl ? (
+                    // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
+                    <Image
+                        src={cloudinaryUrl}
+                        alt="Generated Image"
+                        className="rounded-lg shadow-md mb-8"
+                        width={450}
+                        height={100}
+                    />
+                ) : null}
+            </div>
         </main>
     );
 };
