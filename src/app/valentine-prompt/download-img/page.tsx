@@ -73,7 +73,7 @@ const Loading: React.FC = () => {
     // }, [loading, cloudinaryUrl]);
 
     return (
-        <div className={styles.bgWrap}>
+        <main className={styles.bgWrap}>
             <div className="flex-1">
                 {loading ? (
                     // {/* // แสดง Loader หรือข้อความ "Loading..." */}
@@ -91,12 +91,12 @@ const Loading: React.FC = () => {
                         src={cloudinaryUrl}
                         alt="Generated Image"
                         className="rounded-lg shadow-md mb-8"
-                        width={600}
+                        width={450}
                         height={100}
                     />
                 ) : null}
             </div>
-        </div>
+        </main>
     );
 };
 
