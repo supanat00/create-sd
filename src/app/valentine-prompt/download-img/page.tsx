@@ -86,7 +86,7 @@ const Loading: React.FC = () => {
                     </div>
                 ) : cloudinaryUrl ? (
                     // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
-                    <div className={`absolute left-1/2 -translate-x-1/2`}>
+                    <div className={`absolute`}>
                         <Image
                             src={cloudinaryUrl}
                             alt="Generated Image"
