@@ -33,43 +33,43 @@ const Loading: React.FC = () => {
         fetchImageData();
     }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
 
-    useEffect(() => {
-        const handleDownload = async () => {
-            try {
-                if (cloudinaryUrl) {
-                    // Fetch the image data from Cloudinary
-                    const response = await fetch(cloudinaryUrl);
+    // useEffect(() => {
+    //     const handleDownload = async () => {
+    //         try {
+    //             if (cloudinaryUrl) {
+    //                 // Fetch the image data from Cloudinary
+    //                 const response = await fetch(cloudinaryUrl);
 
-                    if (response.ok) {
-                        // Convert the response to a Blob
-                        const blob = await response.blob();
+    //                 if (response.ok) {
+    //                     // Convert the response to a Blob
+    //                     const blob = await response.blob();
 
-                        // Create a URL for the Blob
-                        const blobUrl = URL.createObjectURL(blob);
+    //                     // Create a URL for the Blob
+    //                     const blobUrl = URL.createObjectURL(blob);
 
-                        // Create a download link
-                        const downloadLink = document.createElement('a');
-                        downloadLink.href = blobUrl;
-                        downloadLink.download = 'wallpaper_theme_valentine.png';
+    //                     // Create a download link
+    //                     const downloadLink = document.createElement('a');
+    //                     downloadLink.href = blobUrl;
+    //                     downloadLink.download = 'wallpaper_theme_valentine.png';
 
-                        // Click the link to trigger the download
-                        downloadLink.click();
-                    } else {
-                        console.error('Error fetching image:', response.statusText);
-                    }
-                }
-            } catch (error) {
-                console.error('Error downloading image:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
+    //                     // Click the link to trigger the download
+    //                     downloadLink.click();
+    //                 } else {
+    //                     console.error('Error fetching image:', response.statusText);
+    //                 }
+    //             }
+    //         } catch (error) {
+    //             console.error('Error downloading image:', error);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
 
-        // Trigger download when the image is loaded
-        if (!loading && cloudinaryUrl) {
-            handleDownload();
-        }
-    }, [loading, cloudinaryUrl]);
+    //     // Trigger download when the image is loaded
+    //     if (!loading && cloudinaryUrl) {
+    //         handleDownload();
+    //     }
+    // }, [loading, cloudinaryUrl]);
 
     return (
         <main className="mt-8 text-center max-w-screen-xl mx-auto flex justify-center items-center">
