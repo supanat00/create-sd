@@ -42,9 +42,35 @@ const Loading: React.FC = () => {
         alert('Share functionality will be implemented here.');
     };
 
-    const handleDownload = () => {
-        // Implement re-download functionality here
-        alert('Re-download functionality will be implemented here.');
+    const handleDownload = async () => {
+        try {
+            if (cloudinaryUrl) {
+                // Fetch the image data from Cloudinary
+                const response = await fetch(cloudinaryUrl);
+
+                if (response.ok) {
+                    // Convert the response to a Blob
+                    const blob = await response.blob();
+
+                    // Create a URL for the Blob
+                    const blobUrl = URL.createObjectURL(blob);
+
+                    // Create a download link
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = blobUrl;
+                    downloadLink.download = 'wallpaper_theme_valentine.png';
+
+                    // Click the link to trigger the download
+                    downloadLink.click();
+                } else {
+                    console.error('Error fetching image:', response.statusText);
+                }
+            }
+        } catch (error) {
+            console.error('Error downloading image:', error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
