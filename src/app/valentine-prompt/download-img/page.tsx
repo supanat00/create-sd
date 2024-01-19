@@ -13,7 +13,7 @@ const Loading: React.FC = () => {
                 const response = await fetch(
                     '/api/stable-diffusion',
                     {
-                        next: { revalidate: 0 }
+                        next: { revalidate: 2 }
                     }
                 );
                 const imageData = await response.json();

@@ -29,7 +29,7 @@ export default function Page() {
                 const response = await fetch(
                     '/api/stable-diffusion',
                     {
-                        next: { revalidate: 0 }
+                        next: { revalidate: 2 }
                     }
                 );
 
