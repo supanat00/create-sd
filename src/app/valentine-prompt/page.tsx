@@ -69,6 +69,8 @@ export default function Page() {
 
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setGenerating(false); // สิ้นสุดการ generate
         }
     }
 
