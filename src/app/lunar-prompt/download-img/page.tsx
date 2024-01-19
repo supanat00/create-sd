@@ -37,10 +37,34 @@ const Loading: React.FC = () => {
         fetchImageData();
     }, []);
 
-    const handleShare = () => {
-        // Implement sharing functionality here
-        alert('Share functionality will be implemented here.');
+    const handleShare = async () => {
+        try {
+            if (navigator.share === undefined) {
+                throw new Error('Unsupported share feature');
+            }
+
+            if (cloudinaryUrl) {
+                // Fetch the image data from Cloudinary
+                const response = await fetch(cloudinaryUrl);
+
+                if (response.ok) {
+                    // Convert the response to a Blob
+                    const blob = await response.blob();
+
+                    // Create a File from Blob
+                    const file = new File([blob], 'wallpaper_theme_lunarday.png', { type: blob.type });
+
+                    // Share the image
+                    await navigator.share({ files: [file] });
+                } else {
+                    console.error('Error fetching image:', response.statusText);
+                }
+            }
+        } catch (error) {
+            console.error('Error sharing image:', error);
+        }
     };
+
 
     const handleDownload = async () => {
         try {
