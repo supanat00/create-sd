@@ -72,29 +72,28 @@ const Loading: React.FC = () => {
     // }, [loading, cloudinaryUrl]);
 
     return (
-        <main className="mt-8 text-center max-w-screen-xl mx-auto flex justify-center items-center">
-            <div className="flex-1">
-                {loading ? (
-                    // แสดง Loader หรือข้อความ "Loading..."
-                    <div className={`absolute top-80 mt-5 left-40 `}>
-                        <div className="loader">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
+        <main className="max-w-screen-xl mx-auto flex justify-center items-center">
+            {loading ? (
+                // แสดง Loader หรือข้อความ "Loading..."
+                <div className={`absolute top-80`}>
+                    <div className="loader">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
-                ) : cloudinaryUrl ? (
-                    // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
-                    <Image
-                        src={cloudinaryUrl}
-                        alt="Generated Image"
-                        className="rounded-lg shadow-md mb-8"
-                        width={450}
-                        height={100}
-                    />
-                ) : null}
-            </div>
+                </div>
+            ) : cloudinaryUrl ? (
+                // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น
+                <Image
+                    src={cloudinaryUrl}
+                    alt="Generated Image"
+                    className="rounded-lg shadow-md"
+                    width={450}
+                    height={100}
+                />
+            ) : null}
+
         </main>
     );
 };

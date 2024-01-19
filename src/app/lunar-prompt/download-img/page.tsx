@@ -2,7 +2,6 @@
 "use client"
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import styles from "../../styles.module.css";
 
 const Loading: React.FC = () => {
     const [loading, setLoading] = useState(true);
@@ -51,7 +50,7 @@ const Loading: React.FC = () => {
     //                     // Create a download link
     //                     const downloadLink = document.createElement('a');
     //                     downloadLink.href = blobUrl;
-    //                     downloadLink.download = 'wallpaper_theme_lunarday.png';
+    //                     downloadLink.download = 'wallpaper_theme_valentine.png';
 
     //                     // Click the link to trigger the download
     //                     downloadLink.click();
@@ -73,10 +72,10 @@ const Loading: React.FC = () => {
     // }, [loading, cloudinaryUrl]);
 
     return (
-        <div className="flex-1">
+        <main className="max-w-screen-xl mx-auto flex justify-center items-center">
             {loading ? (
-                // {/* // แสดง Loader หรือข้อความ "Loading..." */}
-                <div className={`absolute top-80 mt-5 left-40 `}>
+                // แสดง Loader หรือข้อความ "Loading..."
+                <div className={`absolute top-80`}>
                     <div className="loader">
                         <span></span>
                         <span></span>
@@ -89,13 +88,13 @@ const Loading: React.FC = () => {
                 <Image
                     src={cloudinaryUrl}
                     alt="Generated Image"
-                    className="rounded-lg shadow-md mb-8"
+                    className="rounded-lg shadow-md"
                     width={450}
                     height={100}
                 />
             ) : null}
-        </div>
 
+        </main>
     );
 };
 
