@@ -47,10 +47,12 @@ export async function GET(req: Request) {
         // Get the 'cloudinaryUrl' from the latestImageData
         const cloudinaryUrl = latestImageData.photo;
 
+        const reNew = latestImageData.reuse;
+
         // Disconnect from the database
         await prisma.$disconnect();
 
-        return new Response(JSON.stringify({ cloudinaryUrl }), {
+        return new Response(JSON.stringify({ cloudinaryUrl, reNew }), {
             status: 200,
             headers: {
                 'Content-Type': 'application/json',
@@ -121,7 +123,7 @@ export async function POST(request: NextRequest): Promise<any> {
         const postData: PosteringData = {
             namepic: 'Lunar-day', // Replace with your actual data
             photo: cloudinaryUrl,
-            reuse: keyword.map((item: { [s: string]: unknown; } | ArrayLike<unknown>) => Object.values(item).join("")).join(""),
+            reuse: keyword
         };
 
 

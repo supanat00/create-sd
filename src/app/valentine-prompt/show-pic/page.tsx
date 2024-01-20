@@ -14,14 +14,76 @@ import lolipop from "../../../../public/UI/show-img/asset02.png";
 export default function Page() {
     const router = useRouter();
 
+    // Keywords Random
+    const themes = [
+        "(Lunar newyear theme:: wallpaper)",
+        "(Lunar newyear theme:: Wallpaper :: graphic design :: Simple clean art :: minimal style :: decor shape art )",
+        "(Lunar newyear theme:: Geometric :: Abstract Art :: distorted shapes )",
+        "(Lunar newyear theme:: wallpaper :: High Detail :: Unreal Engine Render :: 3D Art style)",
+    ];
+
+    // Function Generate Images from Stable Diffusion
+    const [generating, setGenerating] = useState(false);
+
     const [loading, setLoading] = useState(true);
     const [cloudinaryUrl, setCloudinaryUrl] = useState<string>('');
     const [showButtons, setShowButtons] = useState(true);
+    const [reNew, setRenew] = useState<string>(''); // State ใหม่เพื่อเก็บค่า reuse
 
     // Function to handle the click and navigate to the specified route
     const handleButtonClick = (route: string) => {
         router.push(route);
     };
+
+    const generateImage = async () => {
+        try {
+            setGenerating(true); // เริ่ม generate
+
+            const negative = "no text, no typography, no split frame"
+
+            // สุ่มคำธีมจากอาเรย์
+            const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+
+            // สร้าง text_prompts
+            const textPrompts = [
+                { "text": reNew, "weight": 1 },
+                { "text": randomTheme, "weight": 1 },
+                { "text": negative, "weight": -1 },
+            ];
+
+            const response = await fetch('/api/stable-diffusion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "text_prompts": textPrompts,
+                    "reuse": reNew
+                }),
+            });
+
+            // ตรวจสอบสถานะของ response
+            if (!response.ok) {
+
+                return;
+            }
+
+            // console.log('text_prompts:', textPrompts);
+
+            console.log('Generating... : lunarday-wallpaper');
+
+            const responseData = await response.json();
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setGenerating(false);
+        }
+    }
 
     useEffect(() => {
         const fetchImageData = async () => {
@@ -37,6 +99,8 @@ export default function Page() {
 
                 if (response.ok) {
                     setCloudinaryUrl(imageData.cloudinaryUrl);
+                    setRenew(imageData.reNew);
+                    setGenerating(false);
                 } else {
                     console.error('Error fetching image data:', imageData);
                 }
@@ -46,9 +110,9 @@ export default function Page() {
                 setLoading(false);
             }
         };
-
         fetchImageData();
     }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
+
 
     return (
         <div className={styles.bgWrap}>
@@ -86,28 +150,30 @@ export default function Page() {
             </div>
 
             {/* Show-Img */}
-            <div className={`absolute top-20 mt-5 left-80 ml-28 z-10`}>
-                {loading ? (
-                    // {/* // แสดง Loader หรือข้อความ "Loading..." */}
-                    <div className={`absolute top-80 mt-5 left-40 `}>
-                        <div className="loader">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+            {!generating && (
+                <div className={`absolute top-20 mt-5 left-80 ml-28 z-10`}>
+                    {loading ? (
+                        // {/* // แสดง Loader หรือข้อความ "Loading..." */}
+                        <div className={`absolute top-80 mt-5 left-40 `}>
+                            <div className="loader">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
                         </div>
-                    </div>
-                ) : cloudinaryUrl ? (
-                    // {/* // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น */}
-                    <Image
-                        src={cloudinaryUrl}
-                        alt="Generated Image"
-                        className="rounded-3xl -ml-4"
-                        width={536}
-                        height={100}
-                    />
-                ) : null}
-            </div>
+                    ) : cloudinaryUrl ? (
+                        // {/* // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น */}
+                        <Image
+                            src={cloudinaryUrl}
+                            alt="Generated Image"
+                            className="rounded-3xl -ml-4"
+                            width={536}
+                            height={100}
+                        />
+                    ) : null}
+                </div>
+            )}
 
             {/* QR-Scan */}
             <div className={`absolute top-28 right-40`}>
@@ -120,6 +186,7 @@ export default function Page() {
                         </div>
                         <button
                             onClick={() => setShowButtons(false)}
+                            disabled={generating}
                             className="relative inline-flex items-center justify-center px-36 py-6 text-4xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
                         >
                             ตกลง
@@ -133,6 +200,8 @@ export default function Page() {
                             className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
                         </div>
                         <button
+                            onClick={generateImage}
+                            disabled={generating}
                             className="relative inline-flex items-center justify-center px-16 py-6 text-4xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full whitespace-nowrap"
                         >
                             สร้างภาพอีกครั้ง
@@ -143,7 +212,6 @@ export default function Page() {
                 {/* qr-bg และ qr-img */}
                 {!showButtons && (
                     <>
-
                         <Image
                             alt="frame"
                             src={qr}
@@ -178,6 +246,27 @@ export default function Page() {
                     </>
                 )}
             </div>
+
+            {/* Loading */}
+            {generating && (
+                <div className={`loading2 absolute h-screen w-screen z-80`}>
+                    <Image
+                        alt="Background Image"
+                        src={background}
+                        quality={100}
+                        className={`blur-lg`}
+                        fill={true}
+                        style={{ objectFit: "cover" }}
+                    />
+                    <div className="containerl2 absolute left-1/2 bottom-1/2 transform -translate-x-1/2">
+                        <div className="l2 yellow"></div>
+                        <div className="l2 red"></div>
+                        <div className="l2 blue"></div>
+                        <div className="l2 violet"></div>
+                    </div>
+                    <h2 className="animate relative text-4xl top-28 text-white ">Loading . . .</h2>
+                </div>
+            )}
         </div>
     )
 
