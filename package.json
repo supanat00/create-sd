@@ -20,6 +20,7 @@
     "sharp": "^0.33.2"
   },
   "devDependencies": {
+    "@types/fabric": "^5.3.6",
     "@types/merge-images": "^1.2.4",
     "@types/node": "^20",
     "@types/node-fetch": "^2.6.10",
