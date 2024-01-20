@@ -9,6 +9,12 @@ import Image from 'next/image'
 // Assets 
 import background from "../../../public/UI/lunarday/lunarday-theme.png";
 
+interface PosteringData {
+    namepic?: string;
+    photo: string;
+    reuse: string;
+}
+
 export default function Page() {
     // Route
     const router = useRouter();
@@ -74,6 +80,9 @@ export default function Page() {
                 { "text": negative, "weight": -1 },
             ];
 
+            // เก็บค่าไปใช้ซ้ำ
+            const reuseTexts = [{ text1 }, { text2 }, { text3 }]
+
             const response = await fetch('/api/stable-diffusion', {
                 method: 'POST',
                 headers: {
@@ -81,6 +90,7 @@ export default function Page() {
                 },
                 body: JSON.stringify({
                     "text_prompts": textPrompts,
+                    "reuse": reuseTexts
                 }),
             });
 
@@ -93,11 +103,11 @@ export default function Page() {
 
             // console.log('text_prompts:', textPrompts);
 
-            console.log('Generating... : lunarday-wallpaper');
+            console.log('Generating... : valentine-wallpaper');
 
             const responseData = await response.json();
 
-            router.push('/lunar-prompt/show-pic');
+            router.push('/valentine-prompt/show-pic');
 
         } catch (error) {
             console.error('Error fetching data:', error);

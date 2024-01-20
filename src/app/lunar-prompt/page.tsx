@@ -9,6 +9,12 @@ import Image from 'next/image'
 // Assets 
 import background from "../../../public/UI/lunarday/lunarday-theme.png";
 
+interface PosteringData {
+    namepic?: string;
+    photo: string;
+    reuse: string;
+}
+
 export default function Page() {
     // Route
     const router = useRouter();
@@ -74,6 +80,9 @@ export default function Page() {
                 { "text": negative, "weight": -1 },
             ];
 
+            // เก็บค่าไปใช้ซ้ำ
+            const reuseTexts = [{ text1 }, { text2 }, { text3 }]
+
             const response = await fetch('/api/stable-diffusion', {
                 method: 'POST',
                 headers: {
@@ -81,6 +90,7 @@ export default function Page() {
                 },
                 body: JSON.stringify({
                     "text_prompts": textPrompts,
+                    "reuse": reuseTexts
                 }),
             });
 

@@ -18,6 +18,7 @@ interface TextToImageResponse {
 interface PosteringData {
     namepic?: string;
     photo: string;
+    reuse: string;
 }
 
 cloudinary.config({
@@ -25,6 +26,8 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+
 
 export async function GET(req: Request) {
     try {
@@ -68,7 +71,7 @@ export async function POST(request: NextRequest): Promise<any> {
         if (!apiKey) throw new Error('Missing Stability API key.')
 
         // ดึงข้อมูล text_prompts จาก body ของ request
-        const { text_prompts } = await request.json();
+        const { text_prompts, reuse } = await request.json();
 
         const response = await fetch(
             `${apiHost}/v1/generation/${engineId}/text-to-image`,
@@ -94,6 +97,8 @@ export async function POST(request: NextRequest): Promise<any> {
             throw new Error(`Non-200 response: ${await response.text()}`)
         }
 
+        const keyword = reuse
+
         const responseData: TextToImageResponse = <TextToImageResponse>await response.json();
 
         // Assuming there's only one image in the response
@@ -116,11 +121,19 @@ export async function POST(request: NextRequest): Promise<any> {
         const postData: PosteringData = {
             namepic: 'Lunar-day', // Replace with your actual data
             photo: cloudinaryUrl,
+            reuse: keyword.map((item: { [s: string]: unknown; } | ArrayLike<unknown>) => Object.values(item).join("")).join(""),
         };
 
+
         const savedPostering = await prisma.postering.create({
-            data: postData,
+            data: {
+                namepic: postData.namepic,
+                photo: postData.photo,
+                reuse: postData.reuse,
+
+            },
         });
+
 
         console.log('Saved to MongoDB:', savedPostering);
 
