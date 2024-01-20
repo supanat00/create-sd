@@ -6,8 +6,7 @@ import Image from 'next/image';
 
 // Assets 
 import background from "../../../../public/UI/home/home-bg.png";
-
-const Loading: React.FC = () => {
+export default function Page() {
     const [loading, setLoading] = useState(true);
     const [cloudinaryUrl, setCloudinaryUrl] = useState<string>('');
 
@@ -163,4 +162,4 @@ const Loading: React.FC = () => {
     );
 };
 
-export default Loading;
+
