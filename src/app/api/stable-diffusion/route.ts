@@ -107,9 +107,9 @@ export async function POST(request: NextRequest): Promise<any> {
         const image = responseData.artifacts[0].base64;
 
         // Create a canvas
-        // const canvas = createCanvas(768, 1344);
+        const canvas = createCanvas(768, 1344);
         // Get the 2D context of the canvas
-        // const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d');
         // Load the background image
         // const background = await loadImage(`data:image/png;base64,${image}`);
         // ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
