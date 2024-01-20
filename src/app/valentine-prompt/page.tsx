@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-// Lunar.tsx
+// Valentine.tsx
 'use client'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -7,7 +7,7 @@ import styles from "../styles.module.css";
 import Image from 'next/image'
 
 // Assets 
-import background from "../../../public/UI/lunarday/lunarday-theme.png";
+import background from "../../../public/UI/valentine/valentine-theme.png";
 
 interface PosteringData {
     namepic?: string;
@@ -59,7 +59,7 @@ export default function Page() {
         // After approximately 2 seconds, hide the error div
         setTimeout(() => {
             setIsErrorVisible(false);
-        }, 2000);
+        }, 1750);
     };
 
     const generateImage = async () => {
@@ -81,7 +81,8 @@ export default function Page() {
             ];
 
             // เก็บค่าไปใช้ซ้ำ
-            const reuseTexts = [{ text1 }, { text2 }, { text3 }]
+            const reuseTexts = [text1, text2, text3]
+            const textS = reuseTexts.join("and");
 
             const response = await fetch('/api/stable-diffusion', {
                 method: 'POST',
@@ -90,7 +91,7 @@ export default function Page() {
                 },
                 body: JSON.stringify({
                     "text_prompts": textPrompts,
-                    "reuse": reuseTexts
+                    "reuse": textS
                 }),
             });
 

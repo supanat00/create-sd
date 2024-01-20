@@ -59,7 +59,7 @@ export default function Page() {
         // After approximately 2 seconds, hide the error div
         setTimeout(() => {
             setIsErrorVisible(false);
-        }, 2000);
+        }, 1750);
     };
 
     const generateImage = async () => {
@@ -73,16 +73,16 @@ export default function Page() {
 
             // สร้าง text_prompts
             const textPrompts = [
-                { "text": text1 || "``", "weight": 1 },
-                { "text": text2 || "``", "weight": 1 },
-                { "text": text3 || "``", "weight": 1 },
+                { "text": text1 || "-", "weight": 1 },
+                { "text": text2 || "-", "weight": 1 },
+                { "text": text3 || "-", "weight": 1 },
                 { "text": randomTheme, "weight": 1 },
                 { "text": negative, "weight": -1 },
             ];
 
             // เก็บค่าไปใช้ซ้ำ
-            const reuseTexts = [{ text1, text2, text3 }]
-            reuseTexts.join();
+            const reuseTexts = [text1, text2, text3]
+            const textS = reuseTexts.join("and");
 
 
             const response = await fetch('/api/stable-diffusion', {
@@ -92,7 +92,7 @@ export default function Page() {
                 },
                 body: JSON.stringify({
                     "text_prompts": textPrompts,
-                    "reuse": reuseTexts
+                    "reuse": textS
                 }),
             });
 
@@ -103,7 +103,7 @@ export default function Page() {
                 return;
             }
 
-            // console.log('text_prompts:', textPrompts);
+            console.log('text_prompts:', reuseTexts);
 
             console.log('Generating... : lunarday-wallpaper');
 
