@@ -82,7 +82,7 @@ export default function Page() {
 
             // เก็บค่าไปใช้ซ้ำ
             const reuseTexts = [text1, text2, text3]
-            const textS = reuseTexts.join("and");
+            const textS = reuseTexts.join("-");
 
 
             const response = await fetch('/api/stable-diffusion', {
