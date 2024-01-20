@@ -107,21 +107,21 @@ export async function POST(request: NextRequest): Promise<any> {
         const image = responseData.artifacts[0].base64;
 
         // Create a canvas
-        const canvas = createCanvas(768, 1344);
+        // const canvas = createCanvas(768, 1344);
         // Get the 2D context of the canvas
-        const ctx = canvas.getContext('2d');
+        // const ctx = canvas.getContext('2d');
         // Load the background image
-        const background = await loadImage(`data:image/png;base64,${image}`);
-        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+        // const background = await loadImage(`data:image/png;base64,${image}`);
+        // ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
         // Load the overlay image
-        const overlay = await loadImage(`data:image/png;base64,${fileData}`);
-        ctx.drawImage(overlay, 0, 0, canvas.width, canvas.height);
+        // const overlay = await loadImage(`data:image/png;base64,${fileData}`);
+        // ctx.drawImage(overlay, 0, 0, canvas.width, canvas.height);
 
         // Convert the canvas to a data URL
-        const mergedData = canvas.toDataURL('image/png');
+        // const mergedData = canvas.toDataURL('image/png');
 
         // Upload image to Cloudinary
-        const cloudinaryResponse = await cloudinary.uploader.upload(mergedData, {
+        const cloudinaryResponse = await cloudinary.uploader.upload(image, {
             public_id: 'olympic_flag',
             folder: 'stability',
         });
