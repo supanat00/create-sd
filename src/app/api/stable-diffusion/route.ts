@@ -6,7 +6,6 @@ import fs from 'fs';
 import { NextRequest } from 'next/server'
 import { createCanvas, loadImage } from 'canvas';
 
-import background from "../../../../public/UI/show-img/template.png";
 const prisma = new PrismaClient();
 
 interface TextToImageResponse {
