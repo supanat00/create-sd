@@ -4,7 +4,7 @@ import { v2 as cloudinary } from "cloudinary";
 import { PrismaClient } from '@prisma/client';
 import fs from 'fs';
 import { NextRequest } from 'next/server'
-import { createCanvas, loadImage } from 'canvas';
+// import { createCanvas, loadImage } from 'canvas';
 
 const prisma = new PrismaClient();
 
@@ -103,8 +103,8 @@ export async function POST(request: NextRequest): Promise<any> {
 
         const responseData: TextToImageResponse = <TextToImageResponse>await response.json();
 
-        const fileData = fs.readFileSync('./public/UI/show-img/template.png', { encoding: 'base64' });
-        const image = responseData.artifacts[0].base64;
+        // const fileData = fs.readFileSync('./public/UI/show-img/template.png', { encoding: 'base64' });
+        const image = responseData.artifacts[0];
 
         // Create a canvas
         // const canvas = createCanvas(768, 1344);
@@ -121,7 +121,7 @@ export async function POST(request: NextRequest): Promise<any> {
         // const mergedData = canvas.toDataURL('image/png');
 
         // Upload image to Cloudinary
-        const cloudinaryResponse = await cloudinary.uploader.upload(image, {
+        const cloudinaryResponse = await cloudinary.uploader.upload(`data:image/png;base64,${image.base64}`, {
             public_id: 'olympic_flag',
             folder: 'stability',
         });
