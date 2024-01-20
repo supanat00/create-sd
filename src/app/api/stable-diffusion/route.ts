@@ -121,7 +121,7 @@ export async function POST(request: NextRequest): Promise<any> {
         // const mergedData = canvas.toDataURL('image/png');
 
         // Upload image to Cloudinary
-        const cloudinaryResponse = await cloudinary.uploader.upload(image, {
+        const cloudinaryResponse = await cloudinary.uploader.upload(`data:image/png;base64,${image}`, {
             public_id: 'olympic_flag',
             folder: 'stability',
         });
