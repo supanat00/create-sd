@@ -2,8 +2,8 @@
 import fetch from 'node-fetch'
 import { v2 as cloudinary } from "cloudinary";
 import { PrismaClient } from '@prisma/client';
-import fs from 'fs';
 import { NextRequest } from 'next/server'
+import { Buffer } from 'buffer';
 import { createCanvas, loadImage } from 'canvas';
 
 const prisma = new PrismaClient();
@@ -104,24 +104,43 @@ export async function POST(request: NextRequest): Promise<any> {
         const responseData: TextToImageResponse = <TextToImageResponse>await response.json();
 
         // เรียกไฟล์
-        // const fileData = fs.readFileSync('./public/UI/show-img/template.png', { encoding: 'base64' });
+        const url = 'https://res.cloudinary.com/da8eemrq8/image/upload/v1705827709/template/template_dthco3.png'; // ลิงก์ที่ต้องการอ่าน
+
+        const fetchAndConvertToBase64 = async (url: string): Promise<string> => {
+            try {
+                const response = await fetch(url);
+                const buffer = await response.buffer();
+                const base64String = buffer.toString('base64');
+                return base64String;
+            } catch (error) {
+                console.error('Error fetching or converting to base64:', error);
+                throw error;
+            }
+        };
+
         const image = responseData.artifacts[0].base64;
 
         // โค้ด กรอบภาพ     
-        // const canvas = createCanvas(768, 1344);
+        const canvas = createCanvas(768, 1344);
 
-        // const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d');
 
-        // const background = await loadImage(`data:image/png;base64,${image}`);
-        // ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+        const background = await loadImage(`data:image/png;base64,${image}`);
+        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-        // const overlay = await loadImage(`data:image/png;base64,${fileData}`);
-        // ctx.drawImage(overlay, 0, 0, canvas.width, canvas.height);
+        const overlay = await loadImage(url);
+        ctx.drawImage(overlay, 0, 0, canvas.width, canvas.height);
 
-        // const mergedData = canvas.toDataURL('image/png');
+        const mergedData = canvas.toDataURL('image/png');
 
-        // Upload image to Cloudinary
-        const cloudinaryResponse = await cloudinary.uploader.upload(`data:image/png;base64,${image}`, {
+        // Upload image to Cloudinary V.1
+        // const cloudinaryResponse = await cloudinary.uploader.upload(`data:image/png;base64,${image}`, {
+        //     public_id: 'olympic_flag',
+        //     folder: 'stability',
+        // });
+
+        // Upload image to Cloudinary V.2
+        const cloudinaryResponse = await cloudinary.uploader.upload(mergedData, {
             public_id: 'olympic_flag',
             folder: 'stability',
         });
