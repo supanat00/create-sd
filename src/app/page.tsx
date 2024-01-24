@@ -38,16 +38,6 @@ export default function Page() {
     setIsRightHovered(false);
   };
 
-  const leftStyle = {
-    opacity: isRightHovered ? 0.75 : 0
-  };
-
-  const rightStyle = {
-    opacity: isLeftHovered ? 0.75 : 0,
-  };
-
-
-
   // Function to handle the click and navigate to the specified route
   const handleButtonClick = (route: string) => {
     router.push(route);
@@ -71,8 +61,7 @@ export default function Page() {
       <div className="flex h-screen">
         {/* Left side */}
         <div
-          className={`flex-1 bg-black relative`}
-          style={leftStyle}
+          className={`flex-1 relative opacity-85 transition duration-1000 ${isRightHovered ? 'bg-black' : ''} ${isLeftHovered ? 'bg-gradient-to-t from-white to-5%  ' : ''}`}
           onMouseEnter={handleLeftHover}
           onMouseLeave={handleLeftLeave}
           onClick={() => handleButtonClick('/valentine-prompt')}
@@ -80,8 +69,7 @@ export default function Page() {
 
         {/* Right side */}
         <div
-          className={`flex-1 bg-black relative`}
-          style={rightStyle}
+          className={`flex-1 relative opacity-85 transition duration-1000 ${isLeftHovered ? 'bg-black' : ''} ${isRightHovered ? 'bg-gradient-to-t from-white to-5%  ' : ''}`}
           onMouseEnter={handleRightHover}
           onMouseLeave={handleRightLeave}
           onClick={() => handleButtonClick('/lunar-prompt')}
@@ -89,8 +77,10 @@ export default function Page() {
       </div>
 
 
+
+
       {/* dragon */}
-      <div className={`absolute top-20 left-1/2 transform -translate-x-1/2`}>
+      <div className={`absolute top-36 left-1/2 transform -translate-x-1/2`}>
         <Image
           alt="Head Text Image"
           src={yearofdragon}
@@ -101,12 +91,12 @@ export default function Page() {
       </div>
 
       {/* headtext */}
-      <div className={`absolute top-60 left-1/2 transform -translate-x-1/2`}>
+      <div className={`absolute top-60 mt-6 left-1/2 transform -translate-x-1/2`}>
         <Image
           alt="Head Text Image"
           src={headtext}
-          width={450}
-          height={450}
+          width={420}
+          height={420}
           z-index={"1000"}
 
         />
@@ -117,14 +107,14 @@ export default function Page() {
         <Image
           alt="Center Button Image"
           src={centerbuttom}
-          width={120}
-          height={120}
+          width={80}
+          height={80}
           z-index={"1"}
         />
       </div>
 
       {/* siamcenter */}
-      <div className={`absolute right-11 bottom-10 transform -translate-x-1/2 `}>
+      <div className={`absolute right-0 bottom-0 -mr-24 transform -translate-x-1/2 `}>
         <Image
           alt="Center Button Image"
           src={siamcenter}

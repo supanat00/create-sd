@@ -8,8 +8,8 @@ import { useRouter } from 'next/navigation'
 // Assets 
 import background from "../../../../public/UI/show-img/show_image_bg.png";
 import qr from "../../../../public/UI/show-img/scan-qr.png";
-import strawberry from "../../../../public/UI/show-img/asset01.png";
-import lolipop from "../../../../public/UI/show-img/asset02.png";
+// import strawberry from "../../../../public/UI/show-img/asset01.png";
+// import lolipop from "../../../../public/UI/show-img/asset02.png";
 
 export default function Page() {
     const router = useRouter();
@@ -129,7 +129,7 @@ export default function Page() {
             </div>
 
             {/* Assets */}
-            <div className={`absolute left-96 ml-96 top-80 mt-96 z-40`}>
+            {/* <div className={`absolute left-96 ml-96 top-80 mt-96 z-40`}>
                 <Image
                     src={strawberry}
                     alt="Generated Image"
@@ -147,7 +147,7 @@ export default function Page() {
                     width={890}
                     height={100}
                 />
-            </div>
+            </div> */}
 
             {/* Show-Img */}
             {!generating && (
