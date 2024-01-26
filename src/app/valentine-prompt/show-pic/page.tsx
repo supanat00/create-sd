@@ -6,8 +6,9 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
 
 // Assets 
-import background from "../../../../public/UI/show-img/show_image_bg.png";
+import background from "../../../../public/UI/show-img/show_image_bg.jpg";
 import qr from "../../../../public/UI/show-img/scan-qr.png";
+import GGlink from "../../../../public/generated_images/GGlink.png";
 // import strawberry from "../../../../public/UI/show-img/asset01.png";
 // import lolipop from "../../../../public/UI/show-img/asset02.png";
 
@@ -126,32 +127,11 @@ export default function Page() {
                     fill={true}
                     style={{ objectFit: "cover" }}
                 />
-            </div>
-
-            {/* Assets */}
-            {/* <div className={`absolute left-96 ml-96 top-80 mt-96 z-40`}>
-                <Image
-                    src={strawberry}
-                    alt="Generated Image"
-                    className={`mt-40 top-10 ml-8 relative overflow-hidden`}
-                    width={360}
-                    height={100}
-                />
-            </div>
-
-            <div className={`absolute top-96 -ml-72 z-40`}>
-                <Image
-                    src={lolipop}
-                    alt="Generated Image"
-                    className={`mt-12 top-96 ml-2 relative overflow-hidden`}
-                    width={890}
-                    height={100}
-                />
-            </div> */}
+            </div>            
 
             {/* Show-Img */}
             {!generating && (
-                <div className={`absolute top-20 mt-5 left-80 ml-28 z-10`}>
+                <div className={`absolute top-20 mt-8 left-80 ml-24 z-10`}>
                     {loading ? (
                         // {/* // แสดง Loader หรือข้อความ "Loading..." */}
                         <div className={`absolute top-80 mt-5 left-40 `}>
@@ -167,8 +147,8 @@ export default function Page() {
                         <Image
                             src={cloudinaryUrl}
                             alt="Generated Image"
-                            className="rounded-3xl -ml-4"
-                            width={536}
+                            className={`rounded-3xl ml-2 mt-0`}
+                            width={504}
                             height={100}
                         />
                     ) : null}
@@ -180,14 +160,14 @@ export default function Page() {
 
                 {/* ปุ่มตกลง */}
                 {showButtons && (
-                    <div className={`absolute top-80 right-28`}>
+                    <div className={`absolute top-80 right-28 group`}>      
                         <div
-                            className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
-                        </div>
+                            className="absolute transitiona-all duration-400 opacity-100 -inset-px group-hover:bg-[#00F404] rounded-full blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 ">
+                        </div>                  
                         <button
                             onClick={() => setShowButtons(false)}
                             disabled={generating}
-                            className="relative inline-flex items-center justify-center px-36 py-6 text-4xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
+                            className="relative inline-flex items-center justify-center px-36 py-4 text-4xl font-Circular_sm text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
                         >
                             ตกลง
                         </button>
@@ -195,14 +175,14 @@ export default function Page() {
                 )}
                 {/* ปุ่มสร้างรูปภาพอีกครั้ง */}
                 {showButtons && (
-                    <div className={`absolute top-96 mt-20 right-28`}>
+                    <div className={`absolute top-96 mt-12 right-28 group`}>
                         <div
-                            className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
-                        </div>
+                            className="absolute transitiona-all duration-400 opacity-100 -inset-px group-hover:bg-[#00F404] rounded-full blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 ">
+                        </div>                          
                         <button
                             onClick={generateImage}
                             disabled={generating}
-                            className="relative inline-flex items-center justify-center px-16 py-6 text-4xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full whitespace-nowrap"
+                            className="relative inline-flex items-center justify-center px-16 py-4 text-4xl font-Circular_sm text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full whitespace-nowrap"
                         >
                             สร้างภาพอีกครั้ง
                         </button>
@@ -220,25 +200,33 @@ export default function Page() {
                             z-index={"1"}
                         />
                         <div className={`absolute top-48 mt-2 right-28`}>
+                        {loading ? (
+                            <div className="loader">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        ) : GGlink ? ( 
                             <Image
-                                src="/generated_images/GGlink.png"
+                                src={GGlink}
                                 alt="Generated Image"
                                 className="rounded-3xl shadow-md"
                                 width={470}
                                 height={300}
                             />
+                        ) : null}
                         </div>
                         <div className={`absolute top-10 right-32`}>
                             <h1 className="text-center text-white text-5xl font-semi">สแกนเพื่อดาวน์โหลด<br></br>ภาพ Wallpaper</h1>
                         </div>
-                        <div className={`absolute bottom-20 right-32`}>
-
+                        <div className={`absolute bottom-20 right-32 group`}>
                             <div
-                                className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
-                            </div>
+                                className="absolute transitiona-all duration-400 opacity-100 -inset-px group-hover:bg-[#00F404] rounded-full blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 ">
+                            </div> 
                             <button
                                 onClick={() => handleButtonClick('/')}
-                                className="relative inline-flex items-center justify-center px-32 py-4 text-4xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
+                                className="relative inline-flex items-center justify-center px-32 py-4 text-4xl font-Circular_sm text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
                             >
                                 เล่นอีกครั้ง
                             </button>
@@ -249,7 +237,7 @@ export default function Page() {
 
             {/* Loading */}
             {generating && (
-                <div className={`loading2 absolute h-screen w-screen z-80`}>
+                <div className={`loading2 absolute h-screen w-screen`}>
                     <Image
                         alt="Background Image"
                         src={background}
@@ -258,15 +246,32 @@ export default function Page() {
                         fill={true}
                         style={{ objectFit: "cover" }}
                     />
-                    <div className="containerl2 absolute left-1/2 bottom-1/2 transform -translate-x-1/2">
-                        <div className="l2 yellow"></div>
-                        <div className="l2 red"></div>
-                        <div className="l2 blue"></div>
-                        <div className="l2 violet"></div>
+                    {/* Div-opacity */}
+                    <div
+                        className={`absolute absolute h-screen w-screen bg-black opacity-60`}>
                     </div>
-                    <h2 className="animate relative text-4xl top-28 text-white ">Loading . . .</h2>
+                    {/* Contents Grid */}
+                    <div
+                        className={`absolute left-1/2 top-80 mt-2 transform -translate-x-1/2 bg-white rounded-3xl  shadow-md opacity-20 w-5/12 h-72`}>
+                    </div>
+
+                    {/* Text Input */}
+                    <div className={`absolute left-1/2 top-72 bottom-1/2 transform -translate-x-1/2 w-5/6 h-80 flex flex-col justify-center items-center `}>
+                        {/* Dot-loading */}
+                        <div className="containerl2 absolute left-1/2 bottom-1/2 transform -translate-x-1/2">
+                            <div className="l2 green"></div>
+                            <div className="l2 yelow"></div>
+                            <div className="l2 orange"></div>
+                            <div className="l2 red"></div>
+                            <div className="l2 pink"></div>
+                        </div>                           
+                        {/* Text-loading */}
+                        <div className={`rounded-full bg-white mt-36  p-4 w-4/12 text-center shadow-2xl`}>
+                            <h2 className={`text-3xl text-black font-Circular_sm`}>กำลังประมวลผล . . .</h2>                            
+                        </div>
+                    </div>                         
                 </div>
-            )}
+             )}
         </div>
     )
 

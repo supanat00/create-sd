@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
 
 // Assets 
-import background from "../../../../public/UI/show-img/show_image_bg.png";
+import background from "../../../../public/UI/show-img/show_image_bg.jpg";
 import qr from "../../../../public/UI/show-img/scan-qr.png";
 // import strawberry from "../../../../public/UI/show-img/asset01.png";
 // import lolipop from "../../../../public/UI/show-img/asset02.png";

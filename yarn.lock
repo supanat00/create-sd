@@ -70,11 +70,6 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-2.0.2.tgz"
   integrity sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==
 
-"@img/sharp-win32-x64@0.33.2":
-  version "0.33.2"
-  resolved "https://registry.npmjs.org/@img/sharp-win32-x64/-/sharp-win32-x64-0.33.2.tgz"
-  integrity sha512-E4magOks77DK47FwHUIGH0RYWSgRBfGdK56kIHSVeB9uIS4pPFr4N2kIVsXdQQo4LzOsENKV5KAhRlRL7eMAdg==
-
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
   resolved "https://registry.npmjs.org/@isaacs/cliui/-/cliui-8.0.2.tgz"
@@ -433,6 +428,42 @@
   version "5.8.1"
   resolved "https://registry.npmjs.org/@prisma/client/-/client-5.8.1.tgz"
   integrity sha512-xQtMPfbIwLlbm0VVIVQY2yqQVOxPwRQhvIp7Z3m2900g1bu/zRHKhYZJQWELqmjl6d8YwBy0K2NvMqh47v1ubw==
+
+"@prisma/debug@5.8.1":
+  version "5.8.1"
+  resolved "https://registry.npmjs.org/@prisma/debug/-/debug-5.8.1.tgz"
+  integrity sha512-tjuw7eA0Us3T42jx9AmAgL58rzwzpFGYc3R7Y4Ip75EBYrKMBA1YihuWMcBC92ILmjlQ/u3p8VxcIE0hr+fZfg==
+
+"@prisma/engines-version@5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2":
+  version "5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2"
+  resolved "https://registry.npmjs.org/@prisma/engines-version/-/engines-version-5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2.tgz"
+  integrity sha512-f5C3JM3l9yhGr3cr4FMqWloFaSCpNpMi58Om22rjD2DOz3owci2mFdFXMgnAGazFPKrCbbEhcxdsRfspEYRoFQ==
+
+"@prisma/engines@5.8.1":
+  version "5.8.1"
+  resolved "https://registry.npmjs.org/@prisma/engines/-/engines-5.8.1.tgz"
+  integrity sha512-TJgYLRrZr56uhqcXO4GmP5be+zjCIHtLDK20Cnfg+o9d905hsN065QOL+3Z0zQAy6YD31Ol4u2kzSfRmbJv/uA==
+  dependencies:
+    "@prisma/debug" "5.8.1"
+    "@prisma/engines-version" "5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2"
+    "@prisma/fetch-engine" "5.8.1"
+    "@prisma/get-platform" "5.8.1"
+
+"@prisma/fetch-engine@5.8.1":
+  version "5.8.1"
+  resolved "https://registry.npmjs.org/@prisma/fetch-engine/-/fetch-engine-5.8.1.tgz"
+  integrity sha512-+bgjjoSFa6uYEbAPlklfoVSStOEfcpheOjoBoNsNNSQdSzcwE2nM4Q0prun0+P8/0sCHo18JZ9xqa8gObvgOUw==
+  dependencies:
+    "@prisma/debug" "5.8.1"
+    "@prisma/engines-version" "5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2"
+    "@prisma/get-platform" "5.8.1"
+
+"@prisma/get-platform@5.8.1":
+  version "5.8.1"
+  resolved "https://registry.npmjs.org/@prisma/get-platform/-/get-platform-5.8.1.tgz"
+  integrity sha512-wnA+6HTFcY+tkykMokix9GiAkaauPC5W/gg0O5JB0J8tCTNWrqpnQ7AsaGRfkYUbeOIioh6woDjQrGTTRf1Zag==
+  dependencies:
+    "@prisma/debug" "5.8.1"
 
 "@rushstack/eslint-patch@^1.3.3":
   version "1.6.1"
@@ -942,31 +973,15 @@ color-convert@^2.0.1:
   dependencies:
     color-name "~1.1.4"
 
-color-name@^1.0.0, color-name@~1.1.4:
+color-name@~1.1.4:
   version "1.1.4"
   resolved "https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
-
-color-string@^1.9.0:
-  version "1.9.1"
-  resolved "https://registry.npmjs.org/color-string/-/color-string-1.9.1.tgz"
-  integrity sha512-shrVawQFojnZv6xM40anx4CkoDP+fZsw/ZerEMsW/pyzsRbElpsL/DBVW7q3ExxwusdNXI3lXpuhEZkzs8p5Eg==
-  dependencies:
-    color-name "^1.0.0"
-    simple-swizzle "^0.2.2"
 
 color-support@^1.1.2:
   version "1.1.3"
   resolved "https://registry.npmjs.org/color-support/-/color-support-1.1.3.tgz"
   integrity sha512-qiBjkpbMLO/HL68y+lh4q0/O1MZFj2RX6X/KmMa3+gJD3z+WwI1ZzDHysvqHGS3mP6mznPckpXmw1nI9cJjyRg==
-
-color@^4.2.3:
-  version "4.2.3"
-  resolved "https://registry.npmjs.org/color/-/color-4.2.3.tgz"
-  integrity sha512-1rXeuUUiGGrykh+CeBdu5Ie7OJwinCgQY0bc7GCRxy5xVHy+moaqkpL/jqQq0MtQOeYcrqEz4abc5f0KtU7W4A==
-  dependencies:
-    color-convert "^2.0.1"
-    color-string "^1.9.0"
 
 combined-stream@^1.0.8:
   version "1.0.8"
@@ -1088,7 +1103,7 @@ dequal@^2.0.3:
   resolved "https://registry.npmjs.org/dequal/-/dequal-2.0.3.tgz"
   integrity sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==
 
-detect-libc@^2.0.0, detect-libc@^2.0.2:
+detect-libc@^2.0.0:
   version "2.0.2"
   resolved "https://registry.npmjs.org/detect-libc/-/detect-libc-2.0.2.tgz"
   integrity sha512-UX6sGumvvqSaXgdKGUsgZWqcUyIXZ/vZTrlRT/iobiKhGL0zL4d3osHj3uqllWJK+i+sixDS/3COVEOFbupFyw==
@@ -1866,11 +1881,6 @@ is-array-buffer@^3.0.1, is-array-buffer@^3.0.2:
     get-intrinsic "^1.2.0"
     is-typed-array "^1.1.10"
 
-is-arrayish@^0.3.1:
-  version "0.3.2"
-  resolved "https://registry.npmjs.org/is-arrayish/-/is-arrayish-0.3.2.tgz"
-  integrity sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==
-
 is-async-function@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/is-async-function/-/is-async-function-2.0.0.tgz"
@@ -2243,11 +2253,6 @@ merge-base64@^1.0.4:
   integrity sha512-lOBE6F5DYfc+8Rw2CkmAc3RsjYe3kvZSG8cVfmFwPs2teMUwgBFh6vyMi3EYeAlfVTD1hDPzwzJb656gFqZM8Q==
   dependencies:
     jimp "^0.8.5"
-
-merge-images@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/merge-images/-/merge-images-2.0.0.tgz"
-  integrity sha512-bpI4j54n/Zl6ZTgxaR3xWou/lqI53RAAt8peXijW37BKqoON83LQ7XCZqtFiwzBfEXIws1isYyR06584yffAyA==
 
 merge2@^1.3.0, merge2@^1.4.1:
   version "1.4.1"
@@ -2750,6 +2755,13 @@ prelude-ls@^1.2.1:
   resolved "https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.2.1.tgz"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
+prisma@*, prisma@^5.8.1:
+  version "5.8.1"
+  resolved "https://registry.npmjs.org/prisma/-/prisma-5.8.1.tgz"
+  integrity sha512-N6CpjzECnUHZ5beeYpDzkt2rYpEdAeqXX2dweu6BoQaeYkNZrC/WJHM+5MO/uidFHTak8QhkPKBWck1o/4MD4A==
+  dependencies:
+    "@prisma/engines" "5.8.1"
+
 process@^0.11.10:
   version "0.11.10"
   resolved "https://registry.npmjs.org/process/-/process-0.11.10.tgz"
@@ -2978,35 +2990,6 @@ set-function-name@^2.0.0, set-function-name@^2.0.1:
     functions-have-names "^1.2.3"
     has-property-descriptors "^1.0.0"
 
-sharp@^0.33.2:
-  version "0.33.2"
-  resolved "https://registry.npmjs.org/sharp/-/sharp-0.33.2.tgz"
-  integrity sha512-WlYOPyyPDiiM07j/UO+E720ju6gtNtHjEGg5vovUk1Lgxyjm2LFO+37Nt/UI3MMh2l6hxTWQWi7qk3cXJTutcQ==
-  dependencies:
-    color "^4.2.3"
-    detect-libc "^2.0.2"
-    semver "^7.5.4"
-  optionalDependencies:
-    "@img/sharp-darwin-arm64" "0.33.2"
-    "@img/sharp-darwin-x64" "0.33.2"
-    "@img/sharp-libvips-darwin-arm64" "1.0.1"
-    "@img/sharp-libvips-darwin-x64" "1.0.1"
-    "@img/sharp-libvips-linux-arm" "1.0.1"
-    "@img/sharp-libvips-linux-arm64" "1.0.1"
-    "@img/sharp-libvips-linux-s390x" "1.0.1"
-    "@img/sharp-libvips-linux-x64" "1.0.1"
-    "@img/sharp-libvips-linuxmusl-arm64" "1.0.1"
-    "@img/sharp-libvips-linuxmusl-x64" "1.0.1"
-    "@img/sharp-linux-arm" "0.33.2"
-    "@img/sharp-linux-arm64" "0.33.2"
-    "@img/sharp-linux-s390x" "0.33.2"
-    "@img/sharp-linux-x64" "0.33.2"
-    "@img/sharp-linuxmusl-arm64" "0.33.2"
-    "@img/sharp-linuxmusl-x64" "0.33.2"
-    "@img/sharp-wasm32" "0.33.2"
-    "@img/sharp-win32-ia32" "0.33.2"
-    "@img/sharp-win32-x64" "0.33.2"
-
 shebang-command@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/shebang-command/-/shebang-command-2.0.0.tgz"
@@ -3051,13 +3034,6 @@ simple-get@^3.0.3:
     decompress-response "^4.2.0"
     once "^1.3.1"
     simple-concat "^1.0.0"
-
-simple-swizzle@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.npmjs.org/simple-swizzle/-/simple-swizzle-0.2.2.tgz"
-  integrity sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==
-  dependencies:
-    is-arrayish "^0.3.1"
 
 slash@^3.0.0:
   version "3.0.0"

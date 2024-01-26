@@ -7,7 +7,8 @@ import styles from "../styles.module.css";
 import Image from 'next/image'
 
 // Assets 
-import background from "../../../public/UI/valentine/valentine-theme.png";
+import background from "../../../public/UI/valentine/valentine-theme.jpg";
+import closeimg from "../../../public/UI/error.png";
 
 interface PosteringData {
     namepic?: string;
@@ -23,7 +24,7 @@ export default function Page() {
     const themes = [
         "(Valentine theme:: wallpaper)",
         "(Valentine theme:: Wallpaper :: graphic design :: Simple clean art :: minimal style :: decor shape art )",
-        "(Valentine theme:: Geometric :: Abstract Art :: distorted shapes )",
+        "(Valentine theme:: Wallpaper :: Abstract Art :: distorted shapes )",
         "(Valentine theme:: wallpaper :: High Detail :: Unreal Engine Render :: 3D Art style)",
     ];
 
@@ -43,7 +44,7 @@ export default function Page() {
 
     // Function texts limite
     const handleTextChange = (setter: React.Dispatch<React.SetStateAction<string>>, value: string) => {
-        if (value.length <= 35) {
+        if (value.length <= 50) {
             setter(value);
         }
     };
@@ -135,22 +136,24 @@ export default function Page() {
 
             {/* Contents Grid */}
             <div
-                className={`absolute left-1/2 top-72 transform -translate-x-1/2 bg-white rounded-3xl  shadow-md opacity-50 blur-lg w-5/6 h-96`}>
+                className={`absolute left-1/2 top-80 mt-2 transform -translate-x-1/2 bg-white rounded-3xl  shadow-md opacity-15 w-10/12 h-72`}>
             </div>
 
             {/* Text Input */}
             <div className={`absolute left-1/2 top-72 bottom-1/2 transform -translate-x-1/2 w-5/6 h-80 flex flex-col justify-center items-center`}>
+                <div className={`mt-10 `}>
+                  <h1 className="text-center text-white text-4xl font-Circular_md ">ใส่ "Keyword" ของคุณ เพื่อสร้างภาพหน้าจอพื้นหลังมงคล</h1>
 
-                <h1 className="text-center mt-10 text-white text-5xl font-bold mb-4">ใส่ "Keyword" ของคุณ เพื่อสร้างภาพหน้าจอพื้นหลังแห่งความรัก</h1>
-
-                <h1 className="text-center text-2xl text-gray-200 font-semibold">(กรุณากรอก Keyword เป็นภาษาอังกฤษเท่านั้น)</h1>
+                <h1 className="text-center text-2xl text-gray-200 font-Circular_md opacity-40 ">(กรุณากรอก Keyword เป็นภาษาอังกฤษเท่านั้น)</h1>  
+                </div>
+                
                 <div>
                     <input
                         type="text"
                         placeholder="Keyword 01"
                         value={text1}
                         onChange={(e) => handleTextChange(setText1, e.target.value)}
-                        className={`rounded-full mt-10 text-center p-6 text-3xl m-2 font-semibold shadow-2xl ${generating ? 'pointer-events-none' : ''}`}
+                        className={`rounded-full mt-10 text-center p-5 text-3xl m-2 font-Circular_md shadow-4xl ${generating ? 'pointer-events-none' : ''}`}
                         disabled={generating}
                     />
 
@@ -159,7 +162,7 @@ export default function Page() {
                         placeholder="Keyword 02"
                         value={text2}
                         onChange={(e) => handleTextChange(setText2, e.target.value)}
-                        className={`rounded-full text-center p-6 text-3xl mx-26 m-2 font-semibold shadow-2xl ${generating ? 'pointer-events-none' : ''}`}
+                        className={`rounded-full text-center p-5 text-3xl mx-32  font-Circular_md shadow-2xl ${generating ? 'pointer-events-none' : ''}`}
                         disabled={generating}
                     />
 
@@ -168,7 +171,7 @@ export default function Page() {
                         placeholder="Keyword 03"
                         value={text3}
                         onChange={(e) => handleTextChange(setText3, e.target.value)}
-                        className={`rounded-full text-center p-6 text-3xl m-2 font-semibold shadow-2xl ${generating ? 'pointer-events-none' : ''}`}
+                        className={`rounded-full text-center p-5 text-3xl m-2 font-Circular_md shadow-2xl ${generating ? 'pointer-events-none' : ''}`}
                         disabled={generating}
                     />
                 </div>
@@ -176,13 +179,11 @@ export default function Page() {
 
 
             {/* Button */}
-            <div className={`absolute inline-flex  group left-1/2 bottom-72 transform -translate-x-1/2`}>
-                <div
-                    className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
-                </div>
+            <div className={`absolute inline-flex  group left-1/2 bottom-96 -mb-6 transform -translate-x-1/2`}>                
                 <button
                     onClick={generateImage}
-                    className="relative inline-flex items-center justify-center px-32 py-4 text-4xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
+                    className={`relative inline-flex items-center justify-center px-32 py-4 text-4xl font-Circular_md font-semibold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full shadow-2xl
+                    ${isInputValid ? '' : 'opacity-45 bg-black'}`}
                     disabled={!isInputValid || generating}
                 >
                     {generating ? 'Generating' : 'ตกลง'}
@@ -200,20 +201,36 @@ export default function Page() {
                         fill={true}
                         style={{ objectFit: "cover" }}
                     />
-                    <div className="containerl2 absolute left-1/2 bottom-1/2 transform -translate-x-1/2">
-                        <div className="l2 yellow"></div>
-                        <div className="l2 red"></div>
-                        <div className="l2 blue"></div>
-                        <div className="l2 violet"></div>
+                    {/* Div-opacity */}
+                    <div
+                        className={`absolute absolute h-screen w-screen bg-black opacity-60`}>
                     </div>
-                    <h2 className="animate relative text-4xl top-28 text-white ">Loading . . .</h2>
+                    {/* Contents Grid */}
+                    <div
+                        className={`absolute left-1/2 top-80 mt-2 transform -translate-x-1/2 bg-white rounded-3xl  shadow-md opacity-20 w-5/12 h-72`}>
+                    </div>
+
+                    {/* Text Input */}
+                    <div className={`absolute left-1/2 top-72 bottom-1/2 transform -translate-x-1/2 w-5/6 h-80 flex flex-col justify-center items-center `}>
+                        {/* Dot-loading */}
+                        <div className="containerl2 absolute left-1/2 bottom-1/2 transform -translate-x-1/2">
+                            <div className="l2 green"></div>
+                            <div className="l2 yelow"></div>
+                            <div className="l2 orange"></div>
+                            <div className="l2 red"></div>
+                            <div className="l2 pink"></div>
+                        </div>                           
+                        {/* Text-loading */}
+                        <div className={`rounded-full bg-white mt-36  p-4 w-4/12 text-center shadow-2xl`}>
+                            <h2 className={`text-3xl text-black font-Circular_sm`}>กำลังประมวลผล . . .</h2>                            
+                        </div>
+                    </div>                         
                 </div>
-            )}
+             )}
 
             {/* Error */}
             {error && isErrorVisible && (
-                <div className={`absolute h-screen w-screen`}>
-                    {/* bg */}
+            <div className={`loading2 absolute h-screen w-screen`}>
                     <Image
                         alt="Background Image"
                         src={background}
@@ -222,67 +239,44 @@ export default function Page() {
                         fill={true}
                         style={{ objectFit: "cover" }}
                     />
+                    {/* Div-opacity */}
+                    <div
+                        className={`absolute absolute h-screen w-screen bg-black opacity-60`}>
+                    </div>
+                    {/* Contents Grid */}
+                    <div
+                        className={`absolute left-1/2 top-80 mt-2 transform -translate-x-1/2 bg-white rounded-3xl  shadow-md opacity-20 w-5/12 h-72`}>
+                    </div>
 
-                    {/* moon */}
-                    <div className={`fire-on`}>
-                        <div className={`fire-off absolute h-screen w-screen bg-black opacity-85`}>
-                            <div className="section-center">
-                                <div className="moon">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                                <div className="shooting-star"></div>
-                                <div className="shooting-star-2"></div>
-                                <div className="star"></div>
-                                <div className="star snd"></div>
-                                <div className="star trd"></div>
-                                <div className="star fth"></div>
-                                <div className="star fith"></div>
-                                <div className="circle"></div>
-                                <div className="wood-circle"></div>
-                                <div className="wood"></div>
-                                <div className="tree-1"></div>
-                                <div className="tree-2"></div>
-                                <div className="fire">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div className="smoke">
-                                    <span className="s-0"></span>
-                                    <span className="s-1"></span>
-                                    <span className="s-2"></span>
-                                    <span className="s-3"></span>
-                                    <span className="s-4"></span>
-                                    <span className="s-5"></span>
-                                    <span className="s-6"></span>
-                                    <span className="s-7"></span>
-                                    <span className="s-8"></span>
-                                    <span className="s-9"></span>
-                                </div>
-                            </div>
+                    {/* Text Input */}
+                    <div className={`absolute left-1/2 top-72 bottom-1/2 transform -translate-x-1/2 w-5/6 h-80 flex flex-col justify-center items-center `}>
+                        {/* close_img */}
+                        <div className={`absolute left-1/2 transform -translate-x-1/2 mb-36`}>
+                            <Image
+                            alt="Center Button Image"
+                            src={closeimg}
+                            width={150}
+                            height={80}
+                            z-index={"1"}
+                            />
+                        </div>                        
+                        {/* Text-loading */}
+                        <div className={`rounded-full bg-white mt-36  p-4 w-4/12 text-center shadow-2xl`}>
+                            <h2 className={`text-3xl text-black font-Circular_sm`}>กรุณากรอก "Keyword" ใหม่อีกครั้ง</h2>                            
                         </div>
-                    </div>
-
-                    {/* Text */}
-                    <div className={`absolute top-20 left-1/2 transform -translate-x-1/2 z-80`}>
-                        <h1 className="text-center mt-10 text-white text-5xl font-bold mb-4 ">กรุณากรอก "Keyword" ใหม่อีกครั้ง</h1>
-                    </div>
+                    </div>                     
 
                     {/* Accept Button */}
-                    <div className={`absolute inline-flex  group left-1/2 bottom-40 transform -translate-x-1/2`}>
-                        <div
-                            className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt">
-                        </div>
+                    <div className={`absolute inline-flex  group left-1/2 bottom-96 -mb-6 transform -translate-x-1/2`}>                
                         <button
                             onClick={closeError}
-                            className="relative inline-flex items-center justify-center px-32 py-4 text-4xl font-bold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
+                            className={`relative inline-flex items-center justify-center px-32 py-4 text-4xl font-Circular_md font-semibold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full shadow-2xl
+                            ${isInputValid ? '' : 'opacity-45 bg-black'}`}
+                            disabled={!isInputValid || generating}
                         >
-                            ตกลง
+                            {generating ? 'Generating' : 'ตกลง'}
                         </button>
-                    </div>
-
+                    </div>                     
                 </div>
             )}
 

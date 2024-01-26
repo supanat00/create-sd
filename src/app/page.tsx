@@ -61,7 +61,7 @@ export default function Page() {
       <div className="flex h-screen">
         {/* Left side */}
         <div
-          className={`flex-1 relative opacity-85 transition duration-1000 ${isRightHovered ? 'bg-black' : ''} ${isLeftHovered ? 'bg-gradient-to-t from-white to-5%  ' : ''}`}
+          className={`flex-1 relative opacity-85 transition duration-1000 ${isRightHovered ? 'bg-black' : ''} ${isLeftHovered ? 'bg-gradient-to-t from-[#00F404] to-20%  ' : ''}`}
           onMouseEnter={handleLeftHover}
           onMouseLeave={handleLeftLeave}
           onClick={() => handleButtonClick('/valentine-prompt')}
@@ -69,7 +69,7 @@ export default function Page() {
 
         {/* Right side */}
         <div
-          className={`flex-1 relative opacity-85 transition duration-1000 ${isLeftHovered ? 'bg-black' : ''} ${isRightHovered ? 'bg-gradient-to-t from-white to-5%  ' : ''}`}
+          className={`flex-1 relative opacity-85 transition duration-1000 ${isLeftHovered ? 'bg-black' : ''} ${isRightHovered ? 'bg-gradient-to-t from-[#00F404] to-20%  ' : ''}`}
           onMouseEnter={handleRightHover}
           onMouseLeave={handleRightLeave}
           onClick={() => handleButtonClick('/lunar-prompt')}
@@ -118,8 +118,8 @@ export default function Page() {
         <Image
           alt="Center Button Image"
           src={siamcenter}
-          width={250}
-          height={250}
+          width={220}
+          height={220}
           z-index={"1"}
         />
       </div>
