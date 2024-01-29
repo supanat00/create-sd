@@ -16,8 +16,8 @@ import siamcenter from "../../public/UI/home/siam-center.png";
 export default function Page() {
   const router = useRouter();
 
-  const [isLeftHovered, setIsLeftHovered] = useState<boolean | false>(true);
-  const [isRightHovered, setIsRightHovered] = useState<boolean | false>(true);
+  const [isLeftHovered, setIsLeftHovered] = useState<boolean | false>(false);
+  const [isRightHovered, setIsRightHovered] = useState<boolean | false>(false);
 
   // 2. สร้าง function เพื่อเปลี่ยนแปลง state เมื่อ div ถูก hover หรือไม่ถูก hover
   const handleLeftHover = async () => {

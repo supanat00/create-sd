@@ -105,7 +105,7 @@ export default function Page() {
         // Automatic redirection after 30 seconds
         const timeoutId = setTimeout(() => {
             router.push('/');
-        }, 30000);
+        }, 60000);
 
         // Clear the timeout when the component unmounts
         return () => clearTimeout(timeoutId);
@@ -208,7 +208,7 @@ export default function Page() {
                         </div>
 
                         <div className={`absolute top-14 right-40`}>
-                            <h1 className="text-center text-white text-5xl font-Circular_md">สแกนเพื่อดาวน์โหลด<br></br>ภาพ Wallpaper</h1>
+                            <h1 className="text-center text-white text-4xl font-Circular_md">สแกนเพื่อดาวน์โหลด<br></br>ภาพ Wallpaper</h1>
                         </div>
                         <div className={`absolute bottom-20 right-32 group`}>
                             <div
