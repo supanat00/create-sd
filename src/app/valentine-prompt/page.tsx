@@ -51,16 +51,7 @@ export default function Page() {
 
     // Function Close Error Message
     const closeError = () => {
-        // Remove 'fire-off' class and adjust opacity
-        const errorDiv = document.querySelector('.fire-off');
-        if (errorDiv) {
-            errorDiv.classList.remove('fire-off');
-        }
-
-        // After approximately 2 seconds, hide the error div
-        setTimeout(() => {
-            setIsErrorVisible(false);
-        }, 1750);
+        setIsErrorVisible(false);
     };
 
     const generateImage = async () => {
@@ -82,7 +73,7 @@ export default function Page() {
             ];
 
             // เก็บค่าไปใช้ซ้ำ
-            const reuseTexts = [text1, "-", text2, "-", text3]
+            const reuseTexts = [text1, text2, text3]
             const textS = reuseTexts.join(" - ");
 
             const response = await fetch('/api/stable-diffusion', {
@@ -102,8 +93,6 @@ export default function Page() {
                 setError(errorData.message); // กำหนดข้อความ error ใน state
                 return;
             }
-
-            // console.log('text_prompts:', textPrompts);
 
             console.log('Generating... : valentine-wallpaper');
 
@@ -142,11 +131,11 @@ export default function Page() {
             {/* Text Input */}
             <div className={`absolute left-1/2 top-72 bottom-1/2 transform -translate-x-1/2 w-5/6 h-80 flex flex-col justify-center items-center`}>
                 <div className={`mt-10 `}>
-                  <h1 className="text-center text-white text-4xl font-Circular_md ">ใส่ "Keyword" ของคุณ เพื่อสร้างภาพหน้าจอพื้นหลังมงคล</h1>
+                    <h1 className="text-center text-white text-4xl font-Circular_md ">กรอก "Keyword" ของคุณ เพื่อสร้างภาพหน้าจอพื้นหลังมงคล</h1>
 
-                <h1 className="text-center text-2xl text-gray-200 font-Circular_md opacity-40 ">(กรุณากรอก Keyword เป็นภาษาอังกฤษเท่านั้น)</h1>  
+                    <h1 className="text-center text-2xl text-gray-200 font-Circular_md opacity-40 ">(กรุณากรอก Keyword เป็นภาษาอังกฤษเท่านั้น)</h1>
                 </div>
-                
+
                 <div>
                     <input
                         type="text"
@@ -179,7 +168,11 @@ export default function Page() {
 
 
             {/* Button */}
-            <div className={`absolute inline-flex  group left-1/2 bottom-96 -mb-6 transform -translate-x-1/2`}>                
+            <div className={`absolute inline-flex  group left-1/2 bottom-96 -mb-6 transform -translate-x-1/2`}>
+                <div
+                    className={`absolute transitiona-all duration-400 opacity-100 -inset-px rounded-full blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 ${isInputValid ? 'group-hover:bg-[#00F404]' : ''}`}
+                >
+                </div>
                 <button
                     onClick={generateImage}
                     className={`relative inline-flex items-center justify-center px-32 py-4 text-4xl font-Circular_md font-semibold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full shadow-2xl
@@ -203,7 +196,7 @@ export default function Page() {
                     />
                     {/* Div-opacity */}
                     <div
-                        className={`absolute absolute h-screen w-screen bg-black opacity-60`}>
+                        className={`absolute h-screen w-screen bg-black opacity-60`}>
                     </div>
                     {/* Contents Grid */}
                     <div
@@ -219,18 +212,18 @@ export default function Page() {
                             <div className="l2 orange"></div>
                             <div className="l2 red"></div>
                             <div className="l2 pink"></div>
-                        </div>                           
+                        </div>
                         {/* Text-loading */}
                         <div className={`rounded-full bg-white mt-36  p-4 w-4/12 text-center shadow-2xl`}>
-                            <h2 className={`text-3xl text-black font-Circular_sm`}>กำลังประมวลผล . . .</h2>                            
+                            <h2 className={`text-3xl text-black font-Circular_sm`}>กำลังประมวลผล . . .</h2>
                         </div>
-                    </div>                         
+                    </div>
                 </div>
-             )}
+            )}
 
             {/* Error */}
             {error && isErrorVisible && (
-            <div className={`loading2 absolute h-screen w-screen`}>
+                <div className={`loading2 absolute h-screen w-screen`}>
                     <Image
                         alt="Background Image"
                         src={background}
@@ -241,7 +234,7 @@ export default function Page() {
                     />
                     {/* Div-opacity */}
                     <div
-                        className={`absolute absolute h-screen w-screen bg-black opacity-60`}>
+                        className={`absolute h-screen w-screen bg-black opacity-60`}>
                     </div>
                     {/* Contents Grid */}
                     <div
@@ -253,21 +246,25 @@ export default function Page() {
                         {/* close_img */}
                         <div className={`absolute left-1/2 transform -translate-x-1/2 mb-36`}>
                             <Image
-                            alt="Center Button Image"
-                            src={closeimg}
-                            width={150}
-                            height={80}
-                            z-index={"1"}
+                                alt="Center Button Image"
+                                src={closeimg}
+                                width={150}
+                                height={80}
+                                z-index={"1"}
                             />
-                        </div>                        
+                        </div>
                         {/* Text-loading */}
                         <div className={`rounded-full bg-white mt-36  p-4 w-4/12 text-center shadow-2xl`}>
-                            <h2 className={`text-3xl text-black font-Circular_sm`}>กรุณากรอก "Keyword" ใหม่อีกครั้ง</h2>                            
+                            <h2 className={`text-3xl text-black font-Circular_sm`}>กรุณากรอก "Keyword" ใหม่อีกครั้ง</h2>
                         </div>
-                    </div>                     
+                    </div>
 
                     {/* Accept Button */}
-                    <div className={`absolute inline-flex  group left-1/2 bottom-96 -mb-6 transform -translate-x-1/2`}>                
+                    <div className={`absolute inline-flex  group left-1/2 bottom-96 -mb-6 transform -translate-x-1/2`}>
+                        <div
+                            className={`absolute transitiona-all duration-400 opacity-100 -inset-px rounded-full blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 ${isInputValid ? 'group-hover:bg-[#00F404]' : ''}`}
+                        >
+                        </div>
                         <button
                             onClick={closeError}
                             className={`relative inline-flex items-center justify-center px-32 py-4 text-4xl font-Circular_md font-semibold text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full shadow-2xl
@@ -276,7 +273,8 @@ export default function Page() {
                         >
                             {generating ? 'Generating' : 'ตกลง'}
                         </button>
-                    </div>                     
+
+                    </div>
                 </div>
             )}
 

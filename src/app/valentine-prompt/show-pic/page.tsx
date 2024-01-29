@@ -9,8 +9,7 @@ import { useRouter } from 'next/navigation'
 import background from "../../../../public/UI/show-img/show_image_bg.jpg";
 import qr from "../../../../public/UI/show-img/scan-qr.png";
 import GGlink from "../../../../public/generated_images/GGlink.png";
-// import strawberry from "../../../../public/UI/show-img/asset01.png";
-// import lolipop from "../../../../public/UI/show-img/asset02.png";
+
 
 export default function Page() {
     const router = useRouter();
@@ -19,7 +18,7 @@ export default function Page() {
     const themes = [
         "(Valentine theme:: wallpaper)",
         "(Valentine theme:: Wallpaper :: graphic design :: Simple clean art :: minimal style :: decor shape art )",
-        "(Valentine theme:: Geometric :: Abstract Art :: distorted shapes )",
+        "(Valentine theme:: Wallpaper :: Abstract Art :: distorted shapes )",
         "(Valentine theme:: wallpaper :: High Detail :: Unreal Engine Render :: 3D Art style)",
     ];
 
@@ -63,23 +62,15 @@ export default function Page() {
                 }),
             });
 
-            // ตรวจสอบสถานะของ response
-            if (!response.ok) {
-
-                return;
-            }
-
             // console.log('text_prompts:', textPrompts);
 
-            console.log('Generating... : lunarday-wallpaper');
+            console.log('Generating... : valentine-wallpaper');
 
             const responseData = await response.json();
 
             setTimeout(() => {
                 window.location.reload();
             }, 2000);
-
-
         } catch (error) {
             console.error('Error fetching data:', error);
             setGenerating(false);
@@ -127,7 +118,7 @@ export default function Page() {
                     fill={true}
                     style={{ objectFit: "cover" }}
                 />
-            </div>            
+            </div>
 
             {/* Show-Img */}
             {!generating && (
@@ -160,10 +151,10 @@ export default function Page() {
 
                 {/* ปุ่มตกลง */}
                 {showButtons && (
-                    <div className={`absolute top-80 right-28 group`}>      
+                    <div className={`absolute top-80 right-28 group`}>
                         <div
                             className="absolute transitiona-all duration-400 opacity-100 -inset-px group-hover:bg-[#00F404] rounded-full blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 ">
-                        </div>                  
+                        </div>
                         <button
                             onClick={() => setShowButtons(false)}
                             disabled={generating}
@@ -178,7 +169,7 @@ export default function Page() {
                     <div className={`absolute top-96 mt-12 right-28 group`}>
                         <div
                             className="absolute transitiona-all duration-400 opacity-100 -inset-px group-hover:bg-[#00F404] rounded-full blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 ">
-                        </div>                          
+                        </div>
                         <button
                             onClick={generateImage}
                             disabled={generating}
@@ -199,31 +190,33 @@ export default function Page() {
                             height={250}
                             z-index={"1"}
                         />
+
                         <div className={`absolute top-48 mt-2 right-28`}>
-                        {loading ? (
-                            <div className="loader">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        ) : GGlink ? ( 
-                            <Image
-                                src={GGlink}
-                                alt="Generated Image"
-                                className="rounded-3xl shadow-md"
-                                width={470}
-                                height={300}
-                            />
-                        ) : null}
+                            {loading ? (
+                                <div className="loader">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            ) : GGlink ? (
+                                <Image
+                                    src={GGlink}
+                                    alt="Generated Image"
+                                    className="rounded-3xl shadow-md"
+                                    width={470}
+                                    height={300}
+                                />
+                            ) : null}
                         </div>
+
                         <div className={`absolute top-10 right-32`}>
-                            <h1 className="text-center text-white text-5xl font-semi">สแกนเพื่อดาวน์โหลด<br></br>ภาพ Wallpaper</h1>
+                            <h1 className="text-center text-white text-5xl font-Circular_md">สแกนเพื่อดาวน์โหลด<br></br>ภาพ Wallpaper</h1>
                         </div>
                         <div className={`absolute bottom-20 right-32 group`}>
                             <div
                                 className="absolute transitiona-all duration-400 opacity-100 -inset-px group-hover:bg-[#00F404] rounded-full blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 ">
-                            </div> 
+                            </div>
                             <button
                                 onClick={() => handleButtonClick('/')}
                                 className="relative inline-flex items-center justify-center px-32 py-4 text-4xl font-Circular_sm text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full"
@@ -248,7 +241,7 @@ export default function Page() {
                     />
                     {/* Div-opacity */}
                     <div
-                        className={`absolute absolute h-screen w-screen bg-black opacity-60`}>
+                        className={`absolute h-screen w-screen bg-black opacity-60`}>
                     </div>
                     {/* Contents Grid */}
                     <div
@@ -264,14 +257,14 @@ export default function Page() {
                             <div className="l2 orange"></div>
                             <div className="l2 red"></div>
                             <div className="l2 pink"></div>
-                        </div>                           
+                        </div>
                         {/* Text-loading */}
                         <div className={`rounded-full bg-white mt-36  p-4 w-4/12 text-center shadow-2xl`}>
-                            <h2 className={`text-3xl text-black font-Circular_sm`}>กำลังประมวลผล . . .</h2>                            
+                            <h2 className={`text-3xl text-black font-Circular_sm`}>กำลังประมวลผล . . .</h2>
                         </div>
-                    </div>                         
+                    </div>
                 </div>
-             )}
+            )}
         </div>
     )
 
