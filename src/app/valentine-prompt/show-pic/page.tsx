@@ -18,7 +18,6 @@ export default function Page() {
     const themes = [
         "(Valentine theme:: wallpaper)",
         "(Valentine theme:: Wallpaper :: graphic design :: Simple clean art :: minimal style :: decor shape art )",
-        "(Valentine theme:: Wallpaper :: Abstract Art :: distorted shapes )",
         "(Valentine theme:: wallpaper :: High Detail :: Unreal Engine Render :: 3D Art style)",
     ];
 
@@ -103,7 +102,14 @@ export default function Page() {
             }
         };
         fetchImageData();
-    }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
+
+        // Automatic redirection after 30 seconds
+        const timeoutId = setTimeout(() => {
+            router.push('/');
+        }, 60000);
+
+        return () => clearTimeout(timeoutId);
+    }, [router]); // The empty dependency array ensures that this effect runs only once when the component mounts
 
 
     return (

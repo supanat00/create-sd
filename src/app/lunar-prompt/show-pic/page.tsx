@@ -18,7 +18,6 @@ export default function Page() {
     const themes = [
         "(Lunar newyear theme:: wallpaper)",
         "(Lunar newyear theme:: Wallpaper :: graphic design :: Simple clean art :: minimal style :: decor shape art )",
-        "(Lunar newyear theme:: Wallpaper :: Abstract Art :: distorted shapes )",
         "(Lunar newyear theme:: wallpaper :: High Detail :: Unreal Engine Render :: 3D Art style)",
     ];
 
@@ -103,7 +102,14 @@ export default function Page() {
             }
         };
         fetchImageData();
-    }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
+        // Automatic redirection after 30 seconds
+        const timeoutId = setTimeout(() => {
+            router.push('/');
+        }, 30000);
+
+        // Clear the timeout when the component unmounts
+        return () => clearTimeout(timeoutId);
+    }, [router]); // The empty dependency array ensures that this effect runs only once when the component mounts
 
 
     return (
