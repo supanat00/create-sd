@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // css
 import styles from "./styles.module.css";
@@ -18,6 +18,7 @@ export default function Page() {
 
   const [isLeftHovered, setIsLeftHovered] = useState<boolean | false>(false);
   const [isRightHovered, setIsRightHovered] = useState<boolean | false>(false);
+  const [isFirstMouseMove, setIsFirstMouseMove] = useState<boolean | false>(true);
 
   // 2. สร้าง function เพื่อเปลี่ยนแปลง state เมื่อ div ถูก hover หรือไม่ถูก hover
   const handleLeftHover = async () => {
@@ -42,6 +43,15 @@ export default function Page() {
   const handleButtonClick = (route: string) => {
     router.push(route);
   };
+
+  useEffect(() => {
+    // ถ้าเป็นการขยับเมาส์ครั้งแรก
+    if (isFirstMouseMove) {
+      // ตั้งค่าให้ opacity เป็น 0
+      document.documentElement.style.setProperty('--initial-opacity', '0');
+      setIsFirstMouseMove(false);
+    }
+  }, [isFirstMouseMove]);
 
   return (
     <div>

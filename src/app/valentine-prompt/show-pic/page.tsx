@@ -216,7 +216,7 @@ export default function Page() {
                             ) : null}
                         </div>
 
-                        <div className={`absolute top-14 right-48`}>
+                        <div className={`absolute top-14 right-48 mr-2`}>
                             <h1 className="text-center text-white text-4xl font-Circular_md">สแกนเพื่อดาวน์โหลด<br></br>ภาพ Wallpaper</h1>
                         </div>
                         <div className={`absolute bottom-20 right-32 group`}>
