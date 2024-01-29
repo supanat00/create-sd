@@ -5,8 +5,7 @@ import styles from "../../styles.module.css";
 import Image from 'next/image';
 
 // Assets 
-import background from "../../../../public/UI/home/mobile-ui.jpg";
-
+import background from "../../../../public/UI/home/home-bg.png";
 export default function Page() {
     const [loading, setLoading] = useState(true);
     const [cloudinaryUrl, setCloudinaryUrl] = useState<string>('');
@@ -37,39 +36,9 @@ export default function Page() {
         fetchImageData();
     }, []);
 
-    const handleDownload = async () => {
-        try {
-            if (cloudinaryUrl) {
-                // Fetch the image data from Cloudinary
-                const response = await fetch(cloudinaryUrl);
-
-                if (response.ok) {
-                    // Convert the response to a Blob
-                    const blob = await response.blob();
-
-                    // Create a URL for the Blob
-                    const blobUrl = URL.createObjectURL(blob);
-
-                    // Create a download link
-                    const downloadLink = document.createElement('a');
-                    downloadLink.href = blobUrl;
-                    downloadLink.download = 'wallpaper_theme_lunarday.png';
-
-                    // Click the link to trigger the download
-                    downloadLink.click();
-                } else {
-                    console.error('Error fetching image:', response.statusText);
-                }
-            }
-        } catch (error) {
-            console.error('Error downloading image:', error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
     return (
         <main className="max-w-screen-xl  justify-center items-center">
+
             <div >
                 {/* background */}
                 <div className={styles.bgWrap}>
@@ -78,44 +47,30 @@ export default function Page() {
                         src={background}
                         quality={100}
                         fill={true}
+                        className={`blur-2xl`}
                         style={{ objectFit: "cover" }}
                     />
-
-                    {loading ? (
-                        // แสดง Loader หรือข้อความ "Loading..."
-                        <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}>
-                            <div className="loader">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
+                </div>
+                {loading ? (
+                    // แสดง Loader หรือข้อความ "Loading..."
+                    <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}>
+                        <div className="loader">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
-                    ) : cloudinaryUrl ? (
-                        // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น                    
-                        <Image
-                            src={cloudinaryUrl}
-                            alt="Generated Image"
-                            className="absolute mt-8 rounded-lg shadow-md left-1/2 -translate-x-1/2"
-                            width={250}
-                            height={100}
-                        />
-                    ) : null}
-
-                </div>
-
-                {/* Download Button */}
-                <div className={`absolute inline-flex  group left-1/2 bottom-20 transform -translate-x-1/2`}>
-                    <div
-                        className={`absolute transitiona-all duration-400 opacity-100 -inset-px rounded-full blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200  group-hover:bg-[#00F404]`}
-                    >
                     </div>
-                    <button
-                        onClick={handleDownload}
-                        className="relative inline-flex items-center justify-center px-14 py-2 text-xl font-Circular_sm text-white transition-all duration-200 bg-black font-pj  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 rounded-full">
-                        Download
-                    </button>
-                </div>
+                ) : cloudinaryUrl ? (
+                    // แสดงรูปภาพเมื่อโหลดเสร็จสิ้น                    
+                    <Image
+                        src={cloudinaryUrl}
+                        alt="Generated Image"
+                        className="absolute mt-8 rounded-lg shadow-md left-1/2 -translate-x-1/2"
+                        width={450}
+                        height={100}
+                    />
+                ) : null}
             </div>
         </main>
     );
