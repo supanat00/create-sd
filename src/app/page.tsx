@@ -124,7 +124,7 @@ export default function Page() {
       </div>
 
       {/* siamcenter */}
-      <div className={`absolute right-0 bottom-0 -mr-24 transform -translate-x-1/2 `}>
+      <div className={`absolute right-0 top-0 -mr-24 transform -translate-x-1/2 `}>
         <Image
           alt="Center Button Image"
           src={siamcenter}
