@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 // Assets 
 import background from "../../../../public/UI/show-img/show_image_bg.jpg";
 import qr from "../../../../public/UI/show-img/scan-qr.png";
-import GGlink from "../../../../public/generated_images/GGlink.png";
+import GGlink from "../../../../public/generated_images/load-test.png";
 
 
 export default function Page() {
